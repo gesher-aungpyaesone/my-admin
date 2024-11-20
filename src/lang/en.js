@@ -1,0 +1,56 @@
+// en.js
+import en from 'ra-language-english';
+
+const enfull = {
+  ra: {
+    ...en.ra,
+  },
+  resources: {
+    staff: {
+      name: 'Staff',
+      list: 'Staff List',
+      fields: {
+        id: 'ID',
+        first_name: 'First Name',
+        last_name: 'Last Name',
+        email: 'Email',
+        department: 'Department',
+        position_id: 'Position',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By ID',
+        updated_by_id: 'Updated By ID',
+      },
+    },
+    'staff-position': {
+      name: 'Staff Position',
+      list: 'Staff Position List',
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        description: 'Description',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By ID',
+        updated_by_id: 'Updated By ID',
+      },
+    },
+  },
+  pages: {
+    auth: {
+      login: {
+        name: 'Login',
+        fields: {
+          email: 'Email',
+          password: 'Password',
+          remember_me: 'Remember me',
+          login_btn_name: 'Login',
+        },
+      },
+    },
+  },
+  'Invalid Credentials': 'Invalid credentials. Please try again.',
+  'staff not found': 'The staff has not been registered or has been deleted.',
+};
+
+export default enfull;

@@ -6,40 +6,57 @@ import {
   List,
   NumberField,
   SelectColumnsButton,
+  SimpleList,
   TextField,
   TopToolbar,
 } from 'react-admin';
 
-const ListActions = () => (
-  <TopToolbar>
-    <SelectColumnsButton />
-    <CreateButton />
-    <ExportButton />
-  </TopToolbar>
-);
+import { useMediaQuery } from '@mui/material';
 
-export const StaffPositionList = () => (
-  <List actions={<ListActions />} title="resources.staff-position.list">
-    <DatagridConfigurable>
-      <TextField source="id" />
-      <TextField source="name" />
-      <TextField source="description" />
-      <DateField
-        source="created_at.seconds.low"
-        label="resources.staff-position.fields.created_at"
-        showTime
-        sortBy="created_at"
-        transform={(value) => new Date(value * 1000)}
-      />
-      <DateField
-        source="updated_at.seconds.low"
-        label="resources.staff-position.fields.updated_at"
-        showTime
-        sortBy="updated_at"
-        transform={(value) => new Date(value * 1000)}
-      />
-      <NumberField source="created_by_id" />
-      <NumberField source="updated_by_id" />
-    </DatagridConfigurable>
-  </List>
-);
+const ListActions = () => {
+  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  return (
+    <TopToolbar>
+      {!isSmall && <SelectColumnsButton />}
+      <CreateButton />
+      <ExportButton />
+    </TopToolbar>
+  );
+};
+
+export const StaffPositionList = () => {
+  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+  return (
+    <List actions={<ListActions />} title="resources.staff-position.list">
+      {isSmall ? (
+        <SimpleList
+          primaryText={(record) => record.name}
+          secondaryText={(record) => record.description}
+        />
+      ) : (
+        <DatagridConfigurable>
+          <TextField source="id" />
+          <TextField source="name" />
+          <TextField source="description" />
+          <DateField
+            source="created_at.seconds.low"
+            label="resources.staff-position.fields.created_at"
+            showTime
+            sortBy="created_at"
+            transform={(value) => new Date(value * 1000)}
+          />
+          <DateField
+            source="updated_at.seconds.low"
+            label="resources.staff-position.fields.updated_at"
+            showTime
+            sortBy="updated_at"
+            transform={(value) => new Date(value * 1000)}
+          />
+          <NumberField source="created_by_id" />
+          <NumberField source="updated_by_id" />
+        </DatagridConfigurable>
+      )}
+    </List>
+  );
+};

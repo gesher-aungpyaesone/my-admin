@@ -13,9 +13,14 @@ import { StaffPositionShow } from './staff-position/show';
 import { StaffCreate } from './staff/create';
 import { StaffPositionCreate } from './staff-position/create';
 import { StaffPositionEdit } from './staff-position/edit';
+import LoginPage from './auth/login';
+import { authProvider } from '../provider/authProvider';
 
 const App = () => (
   <Admin
+    defaultTheme="light"
+    loginPage={LoginPage}
+    authProvider={authProvider}
     dataProvider={dataAPIProvider}
     i18nProvider={i18nProvider}
     layout={CustomLayout}

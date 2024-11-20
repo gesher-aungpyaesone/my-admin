@@ -1,3 +1,14 @@
-import { AppBar, ToggleThemeButton } from 'react-admin';
+import { AppBar, ToggleThemeButton, LocalesMenuButton } from 'react-admin';
 
-export const CustomAppBar = () => <AppBar toolbar={<ToggleThemeButton />} />;
+export const CustomAppBar = () => {
+  return (
+    <AppBar
+      toolbar={
+        <>
+          <LocalesMenuButton />
+          <ToggleThemeButton />
+        </>
+      }
+    />
+  );
+};
