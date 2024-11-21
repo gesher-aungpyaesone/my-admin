@@ -60,9 +60,7 @@ export const StaffShow = () => (
         </Box>
       </TabbedShowLayout.Tab>
       <TabbedShowLayout.Tab label="resources.staff.show.tab.permission">
-        <Box sx={{ minHeight: '400px', display: 'block' }}>
-          {/* TODO */}
-        </Box>
+        <Box sx={{ minHeight: '400px', display: 'block' }}>{/* TODO */}</Box>
       </TabbedShowLayout.Tab>
 
       <TabbedShowLayout.Tab label="resources.staff.show.tab.history">

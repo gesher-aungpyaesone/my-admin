@@ -6,6 +6,20 @@ const jpfull = {
     ...japaneseMessages.ra,
   },
   resources: {
+    permission: {
+      name: '権限',
+      list: '権限一覧',
+      fields: {
+        id: 'ID',
+        name: '名前',
+        resource: {
+          name: 'リソース',
+        },
+        type: {
+          name: 'タイプ',
+        },
+      },
+    },
     staff: {
       name: 'スタッフ',
       list: 'スタッフ一覧',
@@ -30,7 +44,7 @@ const jpfull = {
       },
     },
     'staff-position': {
-      name: 'スタッフの役職',
+      name: '役職',
       list: '役職一覧',
       show: {
         tab: {

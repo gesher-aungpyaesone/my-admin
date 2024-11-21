@@ -6,6 +6,20 @@ const enfull = {
     ...en.ra,
   },
   resources: {
+    permission: {
+      name: 'Permission',
+      list: 'Permission List',
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        resource: {
+          name: 'Resource',
+        },
+        type: {
+          name: 'Type',
+        },
+      },
+    },
     staff: {
       name: 'Staff',
       list: 'Staff List',

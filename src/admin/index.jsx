@@ -3,6 +3,7 @@ import { dataAPIProvider } from '../provider/dataAPIProvider';
 import { StaffList } from './staff/list';
 import UserIcon from '@mui/icons-material/Group';
 import PortraitIcon from '@mui/icons-material/Portrait';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { i18nProvider } from '../provider/i18nProvider';
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -15,6 +16,7 @@ import { StaffPositionCreate } from './staff-position/create';
 import { StaffPositionEdit } from './staff-position/edit';
 import LoginPage from './auth/login';
 import { authProvider } from '../provider/authProvider';
+import { PermissionList } from './permission/list';
 
 const App = () => (
   <Admin
@@ -28,6 +30,12 @@ const App = () => (
     theme={nanoLightTheme}
     darkTheme={nanoDarkTheme}
   >
+    <Resource
+      name="permission"
+      list={PermissionList}
+      icon={WorkspacePremiumIcon}
+    />
+
     <Resource
       name="staff-position"
       list={StaffPositionList}
