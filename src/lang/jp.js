@@ -9,6 +9,13 @@ const jpfull = {
     staff: {
       name: 'スタッフ',
       list: 'スタッフ一覧',
+      show: {
+        tab: {
+          profile: 'プロフィール',
+          permission: '権限',
+          history: '履歴',
+        },
+      },
       fields: {
         id: 'ID',
         first_name: '名',
@@ -25,6 +32,12 @@ const jpfull = {
     'staff-position': {
       name: 'スタッフの役職',
       list: '役職一覧',
+      show: {
+        tab: {
+          detail: '詳細',
+          history: '履歴',
+        },
+      },
       fields: {
         id: 'ID',
         name: '役職名',

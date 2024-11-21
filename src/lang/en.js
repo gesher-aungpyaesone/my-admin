@@ -9,6 +9,13 @@ const enfull = {
     staff: {
       name: 'Staff',
       list: 'Staff List',
+      show: {
+        tab: {
+          profile: 'profile',
+          permission: 'permission',
+          history: 'history',
+        },
+      },
       fields: {
         id: 'ID',
         first_name: 'First Name',
@@ -25,6 +32,12 @@ const enfull = {
     'staff-position': {
       name: 'Staff Position',
       list: 'Staff Position List',
+      show: {
+        tab: {
+          detail: 'detail',
+          history: 'history',
+        },
+      },
       fields: {
         id: 'ID',
         name: 'Name',
