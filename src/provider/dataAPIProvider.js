@@ -50,4 +50,9 @@ export const dataAPIProvider = {
       method: 'PUT',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({ data: json.data })),
+
+  delete: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+      method: 'DELETE',
+    }).then(({ json }) => ({ data: json })),
 };

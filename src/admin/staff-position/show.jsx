@@ -1,6 +1,6 @@
 import {
   DateField,
-  NumberField,
+  ReferenceField,
   Show,
   SimpleShowLayout,
   TextField,
@@ -24,8 +24,14 @@ export const StaffPositionShow = () => (
         showTime
         transform={(value) => new Date(value * 1000)}
       />
-      <NumberField source="created_by_id" />
-      <NumberField source="updated_by_id" />
+      <ReferenceField source="created_by_id" reference="user" link={false}>
+        <TextField source="staff.first_name" />{' '}
+        <TextField source="staff.last_name" />
+      </ReferenceField>
+      <ReferenceField source="updated_by_id" reference="user" link={false}>
+        <TextField source="staff.first_name" />{' '}
+        <TextField source="staff.last_name" />
+      </ReferenceField>
     </SimpleShowLayout>
   </Show>
 );
