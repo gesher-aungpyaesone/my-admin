@@ -18,6 +18,8 @@ const enfull = {
         type: {
           name: 'Type',
         },
+        created_at: 'Created At',
+        created_by_id: 'Created By',
       },
     },
     staff: {

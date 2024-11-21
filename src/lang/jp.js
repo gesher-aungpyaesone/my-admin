@@ -18,6 +18,8 @@ const jpfull = {
         type: {
           name: 'タイプ',
         },
+        created_at: '作成日時',
+        created_by_id: '作成者',
       },
     },
     staff: {
