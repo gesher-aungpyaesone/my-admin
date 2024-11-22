@@ -31,6 +31,14 @@ const enfull = {
           permission: 'permission',
           history: 'history',
         },
+        fields: {
+          permissions: 'Permissions',
+          assign_btn_name: 'Assign',
+        },
+        labels: {
+          assign_permissions_lbl: 'Assign permissions',
+          assigned_permission_lbl: 'Assigned permissions',
+        },
       },
       fields: {
         id: 'ID',

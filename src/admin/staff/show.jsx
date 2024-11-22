@@ -7,8 +7,10 @@ import {
   TextField,
   DateField,
   useTranslate,
+  Button,
 } from 'react-admin';
 import {
+  Autocomplete,
   Box,
   Grid,
   Table,
@@ -16,28 +18,121 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TextField as MUITextField,
+  Typography,
 } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
 export const StaffShow = () => {
   const translate = useTranslate();
+  const [staffPermissions, setStaffPermissions] = useState([]);
   const [permissions, setPermissions] = useState([]);
+  const [userNames, setUserNames] = useState({});
+  const [selectedPermissions, setSelectedPermissions] = useState([]);
 
-  // Fetch permissions when the component mounts
-  useEffect(() => {
-    const fetchPermissions = async () => {
-      try {
-        const response = await fetch(
-          'http://localhost:3000/api/staff-permission/by/1',
-        );
-        const result = await response.json();
-        setPermissions(result.data); // Set the permissions data in state
-      } catch (error) {
-        console.error('Error fetching permissions:', error);
+  const fetchUsers = async (userIds) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/user?filter={"id":` +
+          JSON.stringify(userIds) +
+          `}`,
+      );
+      const result = await response.json();
+      return result.data;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null;
+    }
+  };
+
+  const fetchUserNames = async (data) => {
+    const userIds = data.map(
+      (staffPermission) => staffPermission.created_by_id,
+    );
+    const uniqueUserIds = [...new Set(userIds)];
+
+    const userNamesData = {};
+    const users = await fetchUsers(uniqueUserIds);
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+
+      userNamesData[user.id] =
+        `${user.staff.first_name} ${user.staff.last_name}`;
+    }
+    setUserNames(userNamesData);
+  };
+
+  const handleAssignSubmit = async ({ permissions }) => {
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/staff-permission',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            accept: '*/*',
+          },
+          body: JSON.stringify({
+            staff_id: 1,
+            permission_ids: permissions,
+          }),
+        },
+      );
+      if (!response.ok) {
+        throw new Error('Failed to assign permissions');
       }
-    };
 
-    fetchPermissions();
-  }, []);
+      const result = await response.json();
+      if (result.data) {
+        await fetchUserNames(result.data);
+      }
+      setStaffPermissions(result.data ? result.data : []);
+      setSelectedPermissions([]);
+    } catch (error) {
+      console.error('Error assigning permissions:', error);
+    }
+  };
+
+  useEffect(
+    () => {
+      const fetchPermissions = async () => {
+        try {
+          const response = await fetch('http://localhost:3000/api/permission');
+          const result = await response.json();
+          setPermissions(result.data ? result.data : []);
+        } catch (error) {
+          console.error('Error fetching permissions:', error);
+        }
+      };
+
+      const fetchStaffPermissions = async () => {
+        try {
+          const response = await fetch(
+            'http://localhost:3000/api/staff-permission/by/1',
+          );
+          const result = await response.json();
+          setStaffPermissions(result.data ? result.data : []);
+
+          if (result.data) {
+            await fetchUserNames(result.data);
+          }
+        } catch (error) {
+          console.error('Error fetching staffPermissions:', error);
+        }
+      };
+
+      fetchPermissions();
+      fetchStaffPermissions();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const handleAssignClick = () => {
+    handleAssignSubmit({
+      permissions: selectedPermissions.map((perm) => perm.id),
+    });
+  };
 
   return (
     <Show>
@@ -91,7 +186,65 @@ export const StaffShow = () => {
         {/* Permission Tab */}
         <TabbedShowLayout.Tab label="resources.staff.show.tab.permission">
           <Box sx={{ minHeight: '400px', display: 'block' }}>
+            <Typography variant="h6">
+              {translate('resources.staff.show.labels.assign_permissions_lbl')}
+            </Typography>
+            <Box
+              display="flex"
+              flexDirection="row"
+              gap={2}
+              alignItems="center"
+              paddingBottom={'16px'}
+            >
+              <Box
+                flex="2"
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-start"
+              >
+                <Autocomplete
+                  multiple
+                  id="tags-standard"
+                  options={permissions}
+                  getOptionLabel={(option) =>
+                    `[${option.resource.name}] ${option.type.name}`
+                  }
+                  size="small"
+                  value={selectedPermissions}
+                  onChange={(event, newValue) =>
+                    setSelectedPermissions(newValue)
+                  }
+                  renderInput={(params) => (
+                    <MUITextField
+                      {...params}
+                      variant="standard"
+                      label={translate(
+                        'resources.staff.show.fields.permissions',
+                      )}
+                    />
+                  )}
+                  fullWidth
+                />
+              </Box>
+
+              <Box flex="1" display="flex">
+                <Button
+                  startIcon={<SaveIcon />}
+                  onClick={handleAssignClick}
+                  disabled={selectedPermissions.length === 0}
+                  color="primary"
+                  variant="contained"
+                  label={translate(
+                    'resources.staff.show.fields.assign_btn_name',
+                  )}
+                />
+              </Box>
+            </Box>
+
             {/* Table for Permissions */}
+            <Typography variant="h6">
+              {translate('resources.staff.show.labels.assigned_permission_lbl')}
+            </Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -113,27 +266,28 @@ export const StaffShow = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {permissions.map((permission) => (
-                  <TableRow key={permission.id}>
-                    <TableCell>{permission.permission.name}</TableCell>
-                    <TableCell>{permission.permission.resource.name}</TableCell>
-                    <TableCell>{permission.permission.type.name}</TableCell>
+                {staffPermissions.map((staffPermission) => (
+                  <TableRow key={staffPermission.id}>
+                    <TableCell>{staffPermission.permission.name}</TableCell>
                     <TableCell>
-                      <ReferenceField
-                        source="created_by_id"
-                        reference="user"
-                        link={false}
-                      >
-                        <TextField source="staff.first_name" />{' '}
-                        <TextField source="staff.last_name" />
-                      </ReferenceField>
+                      {staffPermission.permission.resource.name}
                     </TableCell>
+                    <TableCell>
+                      {staffPermission.permission.type.name}
+                    </TableCell>
+                    <TableCell>
+                      {userNames[staffPermission.created_by_id]}
+                    </TableCell>
+
                     <TableCell>
                       <DateField
                         source="created_at.seconds.low"
-                        label="Created At"
                         showTime
-                        transform={(value) => new Date(value * 1000)}
+                        transform={() =>
+                          new Date(
+                            staffPermission.created_at.seconds.low * 1000,
+                          )
+                        }
                       />
                     </TableCell>
                   </TableRow>

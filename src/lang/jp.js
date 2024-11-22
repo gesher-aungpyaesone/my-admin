@@ -31,6 +31,14 @@ const jpfull = {
           permission: '権限',
           history: '履歴',
         },
+        fields: {
+          permissions: '権限',
+          assign_btn_name: '任命する',
+        },
+        labels: {
+          assign_permissions_lbl: '権限割り当て',
+          assigned_permission_lbl: '割り当てられた権限',
+        },
       },
       fields: {
         id: 'ID',
