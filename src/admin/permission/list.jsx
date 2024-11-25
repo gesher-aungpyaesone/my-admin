@@ -35,8 +35,8 @@ export const PermissionList = () => {
         <DatagridConfigurable>
           <TextField source="id" />
           <TextField source="name" />
-          <NumberField source="resource.name" />
-          <NumberField source="type.name" />
+          <NumberField source="resource.name" sortBy="resource_id" />
+          <NumberField source="type.name" sortBy="type_id" />
         </DatagridConfigurable>
       )}
     </List>
