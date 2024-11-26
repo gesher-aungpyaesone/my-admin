@@ -8,6 +8,8 @@ import {
   DateField,
   useTranslate,
   Button,
+  useGetRecordId,
+  useShowContext,
 } from 'react-admin';
 import {
   Autocomplete,
@@ -22,13 +24,16 @@ import {
   Typography,
 } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
+import { authProvider } from '../../provider/authProvider';
 
-export const StaffShow = () => {
+const StaffShowLayout = ({ recordId }) => {
   const translate = useTranslate();
   const [staffPermissions, setStaffPermissions] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const [userNames, setUserNames] = useState({});
   const [selectedPermissions, setSelectedPermissions] = useState([]);
+
+  const { record } = useShowContext();
 
   const fetchUsers = async (userIds) => {
     try {
@@ -73,7 +78,7 @@ export const StaffShow = () => {
             accept: '*/*',
           },
           body: JSON.stringify({
-            staff_id: 1,
+            staff_id: +recordId,
             permission_ids: permissions,
           }),
         },
@@ -108,7 +113,7 @@ export const StaffShow = () => {
       const fetchStaffPermissions = async () => {
         try {
           const response = await fetch(
-            'http://localhost:3000/api/staff-permission/by/1',
+            'http://localhost:3000/api/staff-permission/by/' + recordId,
           );
           const result = await response.json();
           setStaffPermissions(result.data ? result.data : []);
@@ -135,111 +140,120 @@ export const StaffShow = () => {
   };
 
   return (
-    <Show>
-      <TabbedShowLayout>
-        {/* Profile Tab */}
-        <TabbedShowLayout.Tab label="resources.staff.show.tab.profile">
-          <Box sx={{ minHeight: '400px', display: 'block' }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Labeled>
-                  <TextField source="id" />
-                </Labeled>
-              </Grid>
-              <Grid item xs={4}>
-                <Labeled>
-                  <TextField source="first_name" />
-                </Labeled>
-              </Grid>
-              <Grid item xs={4}>
-                <Labeled>
-                  <TextField source="last_name" />
-                </Labeled>
-              </Grid>
-              <Grid item xs={12}>
-                <Labeled>
-                  <TextField source="email" />
-                </Labeled>
-              </Grid>
-              <Grid item xs={4}>
-                <Labeled>
-                  <ReferenceField
-                    source="position_id"
-                    reference="staff-position"
-                  />
-                </Labeled>
-              </Grid>
-              <Grid item xs={4}>
-                <Labeled>
-                  <TextField source="department" />
-                </Labeled>
-              </Grid>
-              <Grid item xs={12}>
-                <Labeled>
-                  <TextField source="bio" />
-                </Labeled>
-              </Grid>
+    <TabbedShowLayout>
+      {/* Profile Tab */}
+      <TabbedShowLayout.Tab label="resources.staff.show.tab.profile">
+        <Box sx={{ minHeight: '400px', display: 'block' }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Labeled>
+                <TextField source="id" />
+              </Labeled>
             </Grid>
-          </Box>
-        </TabbedShowLayout.Tab>
+            <Grid item xs={4}>
+              <Labeled>
+                <TextField source="first_name" />
+              </Labeled>
+            </Grid>
+            <Grid item xs={4}>
+              <Labeled>
+                <TextField source="last_name" />
+              </Labeled>
+            </Grid>
+            <Grid item xs={12}>
+              <Labeled>
+                <TextField source="email" />
+              </Labeled>
+            </Grid>
+            <Grid item xs={4}>
+              <Labeled>
+                <ReferenceField
+                  source="position_id"
+                  reference="staff-position"
+                />
+              </Labeled>
+            </Grid>
+            <Grid item xs={4}>
+              <Labeled>
+                <TextField source="department" />
+              </Labeled>
+            </Grid>
+            <Grid item xs={12}>
+              <Labeled>
+                <TextField source="bio" />
+              </Labeled>
+            </Grid>
+          </Grid>
+        </Box>
+      </TabbedShowLayout.Tab>
 
-        {/* Permission Tab */}
+      {/* Permission Tab */}
+      {record && !record.is_root && (
         <TabbedShowLayout.Tab label="resources.staff.show.tab.permission">
           <Box sx={{ minHeight: '400px', display: 'block' }}>
-            <Typography variant="h6">
-              {translate('resources.staff.show.labels.assign_permissions_lbl')}
-            </Typography>
-            <Box
-              display="flex"
-              flexDirection="row"
-              gap={2}
-              alignItems="center"
-              paddingBottom={'16px'}
-            >
-              <Box
-                flex="2"
-                display="flex"
-                alignItems="center"
-                justifyContent="flex-start"
-              >
-                <Autocomplete
-                  multiple
-                  id="tags-standard"
-                  options={permissions}
-                  getOptionLabel={(option) =>
-                    `[${option.resource.name}] ${option.type.name}`
-                  }
-                  size="small"
-                  value={selectedPermissions}
-                  onChange={(event, newValue) =>
-                    setSelectedPermissions(newValue)
-                  }
-                  renderInput={(params) => (
-                    <MUITextField
-                      {...params}
-                      variant="standard"
+            {authProvider.canAccess({
+              resource: 'staff',
+              action: 'edit',
+            }) && (
+              <>
+                <Typography variant="h6">
+                  {translate(
+                    'resources.staff.show.labels.assign_permissions_lbl',
+                  )}
+                </Typography>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  gap={2}
+                  alignItems="center"
+                  paddingBottom={'16px'}
+                >
+                  <Box
+                    flex="2"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                  >
+                    <Autocomplete
+                      multiple
+                      id="tags-standard"
+                      options={permissions}
+                      getOptionLabel={(option) =>
+                        `[${option.resource.name}] ${option.type.name}`
+                      }
+                      size="small"
+                      value={selectedPermissions}
+                      onChange={(event, newValue) =>
+                        setSelectedPermissions(newValue)
+                      }
+                      renderInput={(params) => (
+                        <MUITextField
+                          {...params}
+                          variant="standard"
+                          label={translate(
+                            'resources.staff.show.fields.permissions',
+                          )}
+                        />
+                      )}
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box flex="1" display="flex">
+                    <Button
+                      startIcon={<SaveIcon />}
+                      onClick={handleAssignClick}
+                      disabled={selectedPermissions.length === 0}
+                      color="primary"
+                      variant="contained"
                       label={translate(
-                        'resources.staff.show.fields.permissions',
+                        'resources.staff.show.fields.assign_btn_name',
                       )}
                     />
-                  )}
-                  fullWidth
-                />
-              </Box>
-
-              <Box flex="1" display="flex">
-                <Button
-                  startIcon={<SaveIcon />}
-                  onClick={handleAssignClick}
-                  disabled={selectedPermissions.length === 0}
-                  color="primary"
-                  variant="contained"
-                  label={translate(
-                    'resources.staff.show.fields.assign_btn_name',
-                  )}
-                />
-              </Box>
-            </Box>
+                  </Box>
+                </Box>
+              </>
+            )}
 
             {/* Table for Permissions */}
             <Typography variant="h6">
@@ -296,59 +310,68 @@ export const StaffShow = () => {
             </Table>
           </Box>
         </TabbedShowLayout.Tab>
+      )}
 
-        {/* History Tab */}
-        <TabbedShowLayout.Tab label="resources.staff.show.tab.history">
-          <Box sx={{ minHeight: '400px', display: 'block' }}>
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <Labeled>
-                  <ReferenceField
-                    source="created_by_id"
-                    reference="user"
-                    link={false}
-                  >
-                    <TextField source="staff.first_name" />{' '}
-                    <TextField source="staff.last_name" />
-                  </ReferenceField>
-                </Labeled>
-              </Grid>
-              <Grid item xs={8}>
-                <Labeled>
-                  <DateField
-                    source="created_at.seconds.low"
-                    label="resources.staff.fields.created_at"
-                    showTime
-                    transform={(value) => new Date(value * 1000)}
-                  />
-                </Labeled>
-              </Grid>
-              <Grid item xs={4}>
-                <Labeled>
-                  <ReferenceField
-                    source="updated_by_id"
-                    reference="user"
-                    link={false}
-                  >
-                    <TextField source="staff.first_name" />{' '}
-                    <TextField source="staff.last_name" />
-                  </ReferenceField>
-                </Labeled>
-              </Grid>
-              <Grid item xs={8}>
-                <Labeled>
-                  <DateField
-                    source="updated_at.seconds.low"
-                    label="resources.staff.fields.updated_at"
-                    showTime
-                    transform={(value) => new Date(value * 1000)}
-                  />
-                </Labeled>
-              </Grid>
+      {/* History Tab */}
+      <TabbedShowLayout.Tab label="resources.staff.show.tab.history">
+        <Box sx={{ minHeight: '400px', display: 'block' }}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <Labeled>
+                <ReferenceField
+                  source="created_by_id"
+                  reference="user"
+                  link={false}
+                >
+                  <TextField source="staff.first_name" />{' '}
+                  <TextField source="staff.last_name" />
+                </ReferenceField>
+              </Labeled>
             </Grid>
-          </Box>
-        </TabbedShowLayout.Tab>
-      </TabbedShowLayout>
+            <Grid item xs={8}>
+              <Labeled>
+                <DateField
+                  source="created_at.seconds.low"
+                  label="resources.staff.fields.created_at"
+                  showTime
+                  transform={(value) => new Date(value * 1000)}
+                />
+              </Labeled>
+            </Grid>
+            <Grid item xs={4}>
+              <Labeled>
+                <ReferenceField
+                  source="updated_by_id"
+                  reference="user"
+                  link={false}
+                >
+                  <TextField source="staff.first_name" />{' '}
+                  <TextField source="staff.last_name" />
+                </ReferenceField>
+              </Labeled>
+            </Grid>
+            <Grid item xs={8}>
+              <Labeled>
+                <DateField
+                  source="updated_at.seconds.low"
+                  label="resources.staff.fields.updated_at"
+                  showTime
+                  transform={(value) => new Date(value * 1000)}
+                />
+              </Labeled>
+            </Grid>
+          </Grid>
+        </Box>
+      </TabbedShowLayout.Tab>
+    </TabbedShowLayout>
+  );
+};
+
+export const StaffShow = () => {
+  const recordId = useGetRecordId();
+  return (
+    <Show>
+      <StaffShowLayout recordId={recordId} />
     </Show>
   );
 };

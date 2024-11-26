@@ -41,6 +41,7 @@ export const StaffList = () => {
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />
+          <TextField source="is_root" />
           <TextField source="department" />
           <ReferenceField source="position_id" reference="staff-position" />
           <DateField

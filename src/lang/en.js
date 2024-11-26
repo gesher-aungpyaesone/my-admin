@@ -45,6 +45,7 @@ const enfull = {
         first_name: 'First Name',
         last_name: 'Last Name',
         email: 'Email',
+        is_root: 'Root',
         department: 'Department',
         position_id: 'Position',
         created_at: 'Created At',

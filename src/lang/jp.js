@@ -45,6 +45,7 @@ const jpfull = {
         first_name: '名',
         last_name: '姓',
         email: 'メール',
+        is_root: 'ルート',
         department: '部署',
         position_id: '役職',
         created_at: '作成日時',

@@ -4,6 +4,15 @@ import { stringify } from 'query-string';
 const apiUrl = 'http://localhost:3000/api';
 const httpClient = fetchUtils.fetchJson;
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('access_token');
+  const headers = new Headers(); // Create a Headers object
+  if (token) {
+    headers.append('Authorization', `Bearer ${token}`);
+  }
+  return headers;
+};
+
 export const dataAPIProvider = {
   getList: async (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -15,7 +24,9 @@ export const dataAPIProvider = {
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    const response = await httpClient(url);
+    const response = await httpClient(url, {
+      headers: getAuthHeaders(),
+    });
     const { json } = response;
     return {
       data: json.data,
@@ -24,7 +35,9 @@ export const dataAPIProvider = {
   },
 
   getOne: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+      headers: getAuthHeaders(),
+    }).then(({ json }) => ({
       data: json.data,
     })),
 
@@ -33,7 +46,9 @@ export const dataAPIProvider = {
       filter: JSON.stringify({ id: params.ids }),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    const { json } = await httpClient(url);
+    const { json } = await httpClient(url, {
+      headers: getAuthHeaders(),
+    });
     return { data: json.data };
   },
 
@@ -41,6 +56,7 @@ export const dataAPIProvider = {
     httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
       body: JSON.stringify(params.data),
+      headers: getAuthHeaders(),
     }).then(({ json }) => ({
       data: json.data,
     })),
@@ -49,10 +65,16 @@ export const dataAPIProvider = {
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json.data })),
+      headers: getAuthHeaders(),
+    }).then(({ json }) => ({
+      data: json.data,
+    })),
 
   delete: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
-    }).then(({ json }) => ({ data: json })),
+      headers: getAuthHeaders(),
+    }).then(({ json }) => ({
+      data: json,
+    })),
 };
