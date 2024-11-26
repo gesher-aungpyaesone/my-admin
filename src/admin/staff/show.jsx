@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { authProvider } from '../../provider/authProvider';
+import { staffAPIProvider } from '../../provider/staffAPIProvider';
 
 const StaffShowLayout = ({ recordId }) => {
   const translate = useTranslate();
@@ -35,21 +36,6 @@ const StaffShowLayout = ({ recordId }) => {
 
   const { record } = useShowContext();
 
-  const fetchUsers = async (userIds) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/user?filter={"id":` +
-          JSON.stringify(userIds) +
-          `}`,
-      );
-      const result = await response.json();
-      return result.data;
-    } catch (error) {
-      console.error('Error fetching user:', error);
-      return null;
-    }
-  };
-
   const fetchUserNames = async (data) => {
     const userIds = data.map(
       (staffPermission) => staffPermission.created_by_id,
@@ -57,7 +43,7 @@ const StaffShowLayout = ({ recordId }) => {
     const uniqueUserIds = [...new Set(userIds)];
 
     const userNamesData = {};
-    const users = await fetchUsers(uniqueUserIds);
+    const users = await staffAPIProvider.getUsersByIds(uniqueUserIds);
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
 
@@ -69,29 +55,14 @@ const StaffShowLayout = ({ recordId }) => {
 
   const handleAssignSubmit = async ({ permissions }) => {
     try {
-      const response = await fetch(
-        'http://localhost:3000/api/staff-permission',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            accept: '*/*',
-          },
-          body: JSON.stringify({
-            staff_id: +recordId,
-            permission_ids: permissions,
-          }),
-        },
+      const result = await staffAPIProvider.assignPermissions(
+        recordId,
+        permissions.map((perm) => perm.id),
       );
-      if (!response.ok) {
-        throw new Error('Failed to assign permissions');
-      }
-
-      const result = await response.json();
       if (result.data) {
         await fetchUserNames(result.data);
       }
-      setStaffPermissions(result.data ? result.data : []);
+      setStaffPermissions(result.data || []);
       setSelectedPermissions([]);
     } catch (error) {
       console.error('Error assigning permissions:', error);
@@ -102,9 +73,8 @@ const StaffShowLayout = ({ recordId }) => {
     () => {
       const fetchPermissions = async () => {
         try {
-          const response = await fetch('http://localhost:3000/api/permission');
-          const result = await response.json();
-          setPermissions(result.data ? result.data : []);
+          const result = await staffAPIProvider.getPermissions();
+          setPermissions(result.data || []);
         } catch (error) {
           console.error('Error fetching permissions:', error);
         }
@@ -112,12 +82,8 @@ const StaffShowLayout = ({ recordId }) => {
 
       const fetchStaffPermissions = async () => {
         try {
-          const response = await fetch(
-            'http://localhost:3000/api/staff-permission/by/' + recordId,
-          );
-          const result = await response.json();
-          setStaffPermissions(result.data ? result.data : []);
-
+          const result = await staffAPIProvider.getStaffPermissions(recordId);
+          setStaffPermissions(result.data || []);
           if (result.data) {
             await fetchUserNames(result.data);
           }
@@ -134,9 +100,7 @@ const StaffShowLayout = ({ recordId }) => {
   );
 
   const handleAssignClick = () => {
-    handleAssignSubmit({
-      permissions: selectedPermissions.map((perm) => perm.id),
-    });
+    handleAssignSubmit({ permissions: selectedPermissions });
   };
 
   return (
