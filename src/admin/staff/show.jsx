@@ -27,6 +27,50 @@ import SaveIcon from '@mui/icons-material/Save';
 import { authProvider } from '../../provider/authProvider';
 import { staffAPIProvider } from '../../provider/staffAPIProvider';
 
+const ProfileTab = () => {
+  return (
+    <Box sx={{ minHeight: '400px', display: 'block' }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Labeled>
+            <TextField source="id" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={4}>
+          <Labeled>
+            <TextField source="first_name" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={4}>
+          <Labeled>
+            <TextField source="last_name" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={12}>
+          <Labeled>
+            <TextField source="email" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={4}>
+          <Labeled>
+            <ReferenceField source="position_id" reference="staff-position" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={4}>
+          <Labeled>
+            <TextField source="department" />
+          </Labeled>
+        </Grid>
+        <Grid item xs={12}>
+          <Labeled>
+            <TextField source="bio" />
+          </Labeled>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
 const StaffShowLayout = ({ recordId }) => {
   const translate = useTranslate();
   const [staffPermissions, setStaffPermissions] = useState([]);
@@ -106,51 +150,10 @@ const StaffShowLayout = ({ recordId }) => {
   return (
     <TabbedShowLayout>
       {/* Profile Tab */}
-      <TabbedShowLayout.Tab label="resources.staff.show.tab.profile">
-        <Box sx={{ minHeight: '400px', display: 'block' }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Labeled>
-                <TextField source="id" />
-              </Labeled>
-            </Grid>
-            <Grid item xs={4}>
-              <Labeled>
-                <TextField source="first_name" />
-              </Labeled>
-            </Grid>
-            <Grid item xs={4}>
-              <Labeled>
-                <TextField source="last_name" />
-              </Labeled>
-            </Grid>
-            <Grid item xs={12}>
-              <Labeled>
-                <TextField source="email" />
-              </Labeled>
-            </Grid>
-            <Grid item xs={4}>
-              <Labeled>
-                <ReferenceField
-                  source="position_id"
-                  reference="staff-position"
-                />
-              </Labeled>
-            </Grid>
-            <Grid item xs={4}>
-              <Labeled>
-                <TextField source="department" />
-              </Labeled>
-            </Grid>
-            <Grid item xs={12}>
-              <Labeled>
-                <TextField source="bio" />
-              </Labeled>
-            </Grid>
-          </Grid>
-        </Box>
-      </TabbedShowLayout.Tab>
 
+      <TabbedShowLayout.Tab label="resources.staff.show.tab.profile">
+        <ProfileTab />
+      </TabbedShowLayout.Tab>
       {/* Permission Tab */}
       {record && !record.is_root && (
         <TabbedShowLayout.Tab label="resources.staff.show.tab.permission">

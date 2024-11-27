@@ -1,5 +1,14 @@
 import { fetchUtils } from 'react-admin';
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('access_token');
+  const headers = new Headers(); // Create a Headers object
+  if (token) {
+    headers.append('Authorization', `Bearer ${token}`);
+  }
+  return headers;
+};
+
 const httpClient = fetchUtils.fetchJson;
 const apiUrl = 'http://localhost:3000/api';
 export const authProvider = {
@@ -13,6 +22,7 @@ export const authProvider = {
       localStorage.setItem('is_root', json.is_root);
       if (json.permissions)
         localStorage.setItem('permissions', JSON.stringify(json.permissions));
+      if (json.staff) localStorage.setItem('staff', JSON.stringify(json.staff));
       return Promise.resolve();
     }
     return Promise.reject();
@@ -20,6 +30,7 @@ export const authProvider = {
   logout: () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('is_root');
+    localStorage.removeItem('staff');
     localStorage.removeItem('permissions');
     return Promise.resolve();
   },
@@ -29,10 +40,18 @@ export const authProvider = {
     }
     return Promise.resolve();
   },
-  checkAuth: () => {
-    return localStorage.getItem('access_token')
-      ? Promise.resolve()
-      : Promise.reject();
+  checkAuth: async () => {
+    const { json } = await httpClient(`${apiUrl}/staff-auth`, {
+      headers: getAuthHeaders(),
+    });
+    if (json) {
+      localStorage.setItem('is_root', json.is_root);
+      if (json.permissions)
+        localStorage.setItem('permissions', JSON.stringify(json.permissions));
+      if (json.staff) localStorage.setItem('staff', JSON.stringify(json.staff));
+      return Promise.resolve();
+    }
+    return Promise.reject();
   },
 
   getStaffPermissions: () => {
@@ -55,5 +74,11 @@ export const authProvider = {
         perm.permission.resource.name === resource &&
         perm.permission.type.name === action,
     );
+  },
+
+  async getIdentity() {
+    const authCredentials = JSON.parse(localStorage.getItem('staff'));
+    const { id, first_name, last_name } = authCredentials;
+    return { id, fullName: `${first_name} ${last_name}` };
   },
 };
