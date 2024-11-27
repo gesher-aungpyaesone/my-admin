@@ -73,6 +73,25 @@ const jpfull = {
         updated_by_id: '更新者',
       },
     },
+    group: {
+      name: 'グループ',
+      list: 'グループ一覧',
+      show: {
+        tab: {
+          detail: '詳細',
+          history: '履歴',
+        },
+      },
+      fields: {
+        id: 'ID',
+        name: '役職名',
+        description: '役職説明',
+        created_at: '作成日時',
+        updated_at: '更新日時',
+        created_by_id: '作成者',
+        updated_by_id: '更新者',
+      },
+    },
   },
   pages: {
     auth: {

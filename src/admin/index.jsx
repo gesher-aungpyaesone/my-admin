@@ -1,9 +1,10 @@
 import { Admin, nanoDarkTheme, nanoLightTheme, Resource } from 'react-admin';
 import { dataAPIProvider } from '../provider/dataAPIProvider';
 import { StaffList } from './staff/list';
-import UserIcon from '@mui/icons-material/Group';
+import FaceIcon from '@mui/icons-material/Face';
 import PortraitIcon from '@mui/icons-material/Portrait';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import GroupIcon from '@mui/icons-material/Group';
 import { i18nProvider } from '../provider/i18nProvider';
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -17,6 +18,10 @@ import { StaffPositionEdit } from './staff-position/edit';
 import LoginPage from './auth/login';
 import { authProvider } from '../provider/authProvider';
 import { PermissionList } from './permission/list';
+import { GroupList } from './group/list';
+import { GroupShow } from './group/show';
+import { GroupEdit } from './group/edit';
+import { GroupCreate } from './group/create';
 
 const App = () => (
   <Admin
@@ -31,9 +36,20 @@ const App = () => (
     darkTheme={nanoDarkTheme}
   >
     <Resource
-      name="permission"
-      list={PermissionList}
-      icon={WorkspacePremiumIcon}
+      name="staff"
+      list={StaffList}
+      show={StaffShow}
+      edit={StaffEdit}
+      create={StaffCreate}
+      icon={FaceIcon}
+    />
+    <Resource
+      name="group"
+      list={GroupList}
+      show={GroupShow}
+      edit={GroupEdit}
+      create={GroupCreate}
+      icon={GroupIcon}
     />
 
     <Resource
@@ -45,14 +61,7 @@ const App = () => (
       icon={PortraitIcon}
     />
 
-    <Resource
-      name="staff"
-      list={StaffList}
-      show={StaffShow}
-      edit={StaffEdit}
-      create={StaffCreate}
-      icon={UserIcon}
-    />
+    <Resource name="permission" list={PermissionList} icon={VerifiedIcon} />
   </Admin>
 );
 

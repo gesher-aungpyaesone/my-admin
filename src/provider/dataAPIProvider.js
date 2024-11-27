@@ -29,7 +29,7 @@ export const dataAPIProvider = {
     });
     const { json } = response;
     return {
-      data: json.data,
+      data: json.data ?? [],
       total: json.total_count,
     };
   },

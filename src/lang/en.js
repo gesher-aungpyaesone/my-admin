@@ -73,6 +73,25 @@ const enfull = {
         updated_by_id: 'Updated By',
       },
     },
+    group: {
+      name: 'Group',
+      list: 'Group List',
+      show: {
+        tab: {
+          detail: 'detail',
+          history: 'history',
+        },
+      },
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        description: 'Description',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+    },
   },
   pages: {
     auth: {
