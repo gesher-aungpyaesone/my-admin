@@ -36,7 +36,7 @@ export default [
       'max-lines-per-function': [
         'error',
         {
-          max: 1000,
+          max: 100,
           skipComments: true,
           skipBlankLines: true,
         },
