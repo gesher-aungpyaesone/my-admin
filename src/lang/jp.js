@@ -63,6 +63,11 @@ const jpfull = {
           history: '履歴',
         },
       },
+      tabs: {
+        info: '基本情報',
+        members: 'メンバー',
+        history: '履歴',
+      },
       fields: {
         id: 'ID',
         name: '役職名',
@@ -71,6 +76,9 @@ const jpfull = {
         updated_at: '更新日時',
         created_by_id: '作成者',
         updated_by_id: '更新者',
+      },
+      titles: {
+        create: '役職作成',
       },
     },
     group: {

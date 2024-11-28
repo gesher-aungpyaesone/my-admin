@@ -63,6 +63,11 @@ const enfull = {
           history: 'history',
         },
       },
+      tabs: {
+        info: 'information',
+        members: 'members',
+        history: 'history',
+      },
       fields: {
         id: 'ID',
         name: 'Name',
@@ -71,6 +76,9 @@ const enfull = {
         updated_at: 'Updated At',
         created_by_id: 'Created By',
         updated_by_id: 'Updated By',
+      },
+      titles: {
+        create: 'Create Staff Position',
       },
     },
     group: {
