@@ -11,16 +11,13 @@ import {
   Button,
   useGetRecordId,
   useShowContext,
+  ReferenceManyField,
+  Datagrid,
 } from 'react-admin';
 import {
   Autocomplete,
   Box,
   Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   TextField as MUITextField,
   Typography,
 } from '@mui/material';
@@ -125,60 +122,57 @@ const ProfileTab = () => {
   );
 };
 
-const PermissionTable = ({ staffPermissions, userNames }) => {
+const PermissionTable = () => {
   const translate = useTranslate();
   return (
     <>
       <Typography variant="h6">
         {translate('resources.staff.show.labels.assigned_permission_lbl')}
       </Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              {translate('resources.permission.fields.name')}
-            </TableCell>
-            <TableCell>
-              {translate('resources.permission.fields.resource.name')}
-            </TableCell>
-            <TableCell>
-              {translate('resources.permission.fields.type.name')}
-            </TableCell>
-            <TableCell>
-              {translate('resources.permission.fields.created_at')}
-            </TableCell>
-            <TableCell>
-              {translate('resources.permission.fields.created_by_id')}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {staffPermissions.map((staffPermission) => (
-            <TableRow key={staffPermission.id}>
-              <TableCell>{staffPermission.permission.name}</TableCell>
-              <TableCell>{staffPermission.permission.resource.name}</TableCell>
-              <TableCell>{staffPermission.permission.type.name}</TableCell>
-              <TableCell>{userNames[staffPermission.created_by_id]}</TableCell>
+      <ReferenceManyField reference="staff-permission" target="staff_id">
+        <Datagrid bulkActionButtons={false}>
+          <ReferenceField
+            sortBy="permission_id"
+            source="permission.id"
+            reference="permission"
+            label="resources.permission.fields.name"
+          ></ReferenceField>
 
-              <TableCell>
-                <DateField
-                  source="created_at.seconds.low"
-                  showTime
-                  transform={() =>
-                    new Date(staffPermission.created_at.seconds.low * 1000)
-                  }
-                />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          <ReferenceField
+            sortable={false}
+            source="permission.id"
+            reference="permission"
+            label="resources.permission.fields.resource.name"
+          >
+            <TextField source="resource.name" />
+          </ReferenceField>
+          <ReferenceField
+            sortable={false}
+            source="permission.id"
+            reference="permission"
+            label="resources.permission.fields.type.name"
+          >
+            <TextField source="type.name" />
+          </ReferenceField>
+          <ReferenceField
+            source="created_by_id"
+            reference="user"
+            label="resources.permission.fields.created_by_id"
+          >
+            <TextField source="staff.first_name" />{' '}
+            <TextField source="staff.last_name" />
+          </ReferenceField>
+          <DateField
+            sortBy="created_at"
+            label="resources.permission.fields.created_at"
+            source="created_at.seconds.low"
+            showTime
+            transform={(value) => new Date(value * 1000)}
+          />
+        </Datagrid>
+      </ReferenceManyField>
     </>
   );
-};
-PermissionTable.propTypes = {
-  staffPermissions: PropTypes.array.isRequired,
-  userNames: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 const AssignStaffPermission = ({ permissions, handleAssignSubmit }) => {
@@ -249,72 +243,31 @@ AssignStaffPermission.propTypes = {
 };
 
 const StaffShowLayout = ({ recordId }) => {
-  const [staffPermissions, setStaffPermissions] = useState([]);
   const [permissions, setPermissions] = useState([]);
-  const [userNames, setUserNames] = useState({});
   const { record } = useShowContext();
-
-  const fetchUserNames = async (data) => {
-    const userIds = data.map(
-      (staffPermission) => staffPermission.created_by_id,
-    );
-    const uniqueUserIds = [...new Set(userIds)];
-
-    const userNamesData = {};
-    const users = await staffAPIProvider.getUsersByIds(uniqueUserIds);
-    for (let index = 0; index < users.length; index++) {
-      const user = users[index];
-
-      userNamesData[user.id] =
-        `${user.staff.first_name} ${user.staff.last_name}`;
-    }
-    setUserNames(userNamesData);
-  };
 
   const handleAssignSubmit = async ({ permissions }) => {
     try {
-      const result = await staffAPIProvider.assignPermissions(
+      await staffAPIProvider.assignPermissions(
         recordId,
         permissions.map((perm) => perm.id),
       );
-      if (result.data) {
-        await fetchUserNames(result.data);
-      }
-      setStaffPermissions(result.data || []);
     } catch (error) {
       console.error('Error assigning permissions:', error);
     }
   };
 
-  useEffect(
-    () => {
-      const fetchPermissions = async () => {
-        try {
-          const result = await staffAPIProvider.getPermissions();
-          setPermissions(result.data || []);
-        } catch (error) {
-          console.error('Error fetching permissions:', error);
-        }
-      };
-
-      const fetchStaffPermissions = async () => {
-        try {
-          const result = await staffAPIProvider.getStaffPermissions(recordId);
-          setStaffPermissions(result.data || []);
-          if (result.data) {
-            await fetchUserNames(result.data);
-          }
-        } catch (error) {
-          console.error('Error fetching staffPermissions:', error);
-        }
-      };
-
-      fetchPermissions();
-      fetchStaffPermissions();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
+  useEffect(() => {
+    const fetchPermissions = async () => {
+      try {
+        const result = await staffAPIProvider.getPermissions();
+        setPermissions(result.data || []);
+      } catch (error) {
+        console.error('Error fetching permissions:', error);
+      }
+    };
+    fetchPermissions();
+  }, []);
   StaffShowLayout.propTypes = {
     recordId: PropTypes.number.isRequired,
   };
@@ -340,10 +293,7 @@ const StaffShowLayout = ({ recordId }) => {
             )}
 
             {/* Table for Permissions */}
-            <PermissionTable
-              userNames={userNames}
-              staffPermissions={staffPermissions}
-            />
+            <PermissionTable />
           </Box>
         </TabbedShowLayout.Tab>
       )}
