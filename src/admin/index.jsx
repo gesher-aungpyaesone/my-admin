@@ -8,7 +8,6 @@ import GroupIcon from '@mui/icons-material/Group';
 import { i18nProvider } from '../provider/i18nProvider';
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
-import { StaffShow } from './staff/show';
 import { StaffEdit } from './staff/edit';
 import { StaffPositionList } from './staff-position/list';
 import { StaffCreate } from './staff/create';
@@ -18,7 +17,6 @@ import LoginPage from './auth/login';
 import { authProvider } from '../provider/authProvider';
 import { PermissionList } from './permission/list';
 import { GroupList } from './group/list';
-import { GroupShow } from './group/show';
 import { GroupEdit } from './group/edit';
 import { GroupCreate } from './group/create';
 
@@ -37,7 +35,7 @@ const App = () => (
     <Resource
       name="staff"
       list={StaffList}
-      show={StaffShow}
+      // show={StaffShow}
       edit={StaffEdit}
       create={StaffCreate}
       icon={FaceIcon}
@@ -45,7 +43,7 @@ const App = () => (
     <Resource
       name="group"
       list={GroupList}
-      show={GroupShow}
+      // show={GroupShow}
       edit={GroupEdit}
       create={GroupCreate}
       icon={GroupIcon}
@@ -54,7 +52,6 @@ const App = () => (
     <Resource
       name="staff-position"
       list={StaffPositionList}
-      // show={StaffPositionShow}
       edit={StaffPositionEdit}
       create={StaffPositionCreate}
       icon={PortraitIcon}

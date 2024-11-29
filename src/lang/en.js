@@ -38,6 +38,8 @@ const enfull = {
         labels: {
           assign_permissions_lbl: 'Assign permissions',
           assigned_permission_lbl: 'Assigned permissions',
+          assign_groups_lbl: 'Assign groups',
+          assigned_group_lbl: 'Assigned groups',
         },
       },
       fields: {
@@ -53,6 +55,15 @@ const enfull = {
         created_by_id: 'Created By',
         updated_by_id: 'Updated By',
       },
+      tabs: {
+        info: 'information',
+        permission: 'permission',
+        group: 'group',
+        history: 'history',
+      },
+      messages: {
+        root_access_msg: 'You have root access. You can access everything.',
+      },
     },
     'staff-position': {
       name: 'Staff Position',
@@ -65,7 +76,7 @@ const enfull = {
       },
       tabs: {
         info: 'information',
-        members: 'members',
+        member: 'member',
         history: 'history',
       },
       fields: {
@@ -98,6 +109,12 @@ const enfull = {
         updated_at: 'Updated At',
         created_by_id: 'Created By',
         updated_by_id: 'Updated By',
+      },
+      tabs: {
+        info: 'information',
+        permission: 'permission',
+        member: 'member',
+        history: 'history',
       },
     },
   },

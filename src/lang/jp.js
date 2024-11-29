@@ -38,6 +38,8 @@ const jpfull = {
         labels: {
           assign_permissions_lbl: '権限割り当て',
           assigned_permission_lbl: '割り当てられた権限',
+          assign_groups_lbl: 'グループの割り当て',
+          assigned_group_lbl: '割り当てられたグループ',
         },
       },
       fields: {
@@ -53,6 +55,16 @@ const jpfull = {
         created_by_id: '作成者',
         updated_by_id: '更新者',
       },
+      tabs: {
+        info: '基本情報',
+        permission: '権限',
+        group: 'グループ',
+        history: '履歴',
+      },
+      messages: {
+        root_access_msg:
+          'あなたはルートアカウントです。すべてにアクセスできます。',
+      },
     },
     'staff-position': {
       name: '役職',
@@ -65,7 +77,7 @@ const jpfull = {
       },
       tabs: {
         info: '基本情報',
-        members: 'メンバー',
+        member: 'メンバー',
         history: '履歴',
       },
       fields: {
@@ -98,6 +110,12 @@ const jpfull = {
         updated_at: '更新日時',
         created_by_id: '作成者',
         updated_by_id: '更新者',
+      },
+      tabs: {
+        info: '基本情報',
+        permission: '権限',
+        member: 'メンバー',
+        history: '履歴',
       },
     },
   },

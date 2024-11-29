@@ -12,7 +12,7 @@ export const StaffCreate = () => {
       <SimpleForm>
         <TextInput source="first_name" />
         <TextInput source="last_name" />
-        <TextInput source="email" />
+        <TextInput source="email" type="email" />
         <PasswordInput source="password" />
         <TextInput source="department" />
         <ReferenceInput source="position_id" reference="staff-position" />

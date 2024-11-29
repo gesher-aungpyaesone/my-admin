@@ -244,14 +244,17 @@ AssignStaffPermission.propTypes = {
 
 const StaffShowLayout = ({ recordId }) => {
   const [permissions, setPermissions] = useState([]);
+  const [staffPermissions, setStaffPermissions] = useState([]);
   const { record } = useShowContext();
 
   const handleAssignSubmit = async ({ permissions }) => {
     try {
-      await staffAPIProvider.assignPermissions(
+      setStaffPermissions([]);
+      const result = await staffAPIProvider.assignPermissions(
         recordId,
         permissions.map((perm) => perm.id),
       );
+      setStaffPermissions(result.data);
     } catch (error) {
       console.error('Error assigning permissions:', error);
     }
@@ -266,7 +269,17 @@ const StaffShowLayout = ({ recordId }) => {
         console.error('Error fetching permissions:', error);
       }
     };
+    const fetchStaffPermissions = async () => {
+      try {
+        const result = await staffAPIProvider.getStaffPermissions(recordId);
+        setStaffPermissions(result.data || []);
+      } catch (error) {
+        console.error('Error fetching staffPermissions:', error);
+      }
+    };
+
     fetchPermissions();
+    fetchStaffPermissions();
   }, []);
   StaffShowLayout.propTypes = {
     recordId: PropTypes.number.isRequired,
@@ -293,7 +306,7 @@ const StaffShowLayout = ({ recordId }) => {
             )}
 
             {/* Table for Permissions */}
-            <PermissionTable />
+            {staffPermissions.length > 0 && <PermissionTable />}
           </Box>
         </TabbedShowLayout.Tab>
       )}
