@@ -12,8 +12,115 @@ import {
   Labeled,
   useTranslate,
   useRecordContext,
+  SaveButton,
+  Button,
+  BooleanInput,
+  ReferenceArrayInput,
+  AutocompleteArrayInput,
+  useDataProvider,
+  useGetRecordId,
+  useRefresh,
+  useAuthProvider,
 } from 'react-admin';
 import { Box, Grid, Typography } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
+import { useEffect, useState } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { staffAPIProvider } from '../../provider/staffAPIProvider';
+import { useNavigate } from 'react-router-dom';
+
+const PermissionAssignForm = () => {
+  const translate = useTranslate();
+  const recordId = useGetRecordId();
+  const refresh = useRefresh();
+  const isAllAllowed = useWatch({ name: 'is_allowed_all' });
+  const permissionId = useWatch({ name: 'permission_id' });
+  const [resourceName, setResourceName] = useState(null);
+  const [isAllowedAllPermission, setIsAllowedAllPermission] = useState(true);
+  const dataProvider = useDataProvider();
+  const { setValue, handleSubmit } = useFormContext();
+
+  useEffect(() => {
+    if (permissionId) {
+      dataProvider
+        .getOne('permission', { id: permissionId })
+        .then(({ data }) => {
+          console.log(data);
+          if (data && data.resource) {
+            setResourceName(data.resource.name);
+          }
+          if (
+            data &&
+            data.type &&
+            (data.type.name === 'create' || data.type.name === 'export')
+          ) {
+            setIsAllowedAllPermission(true);
+          } else {
+            setIsAllowedAllPermission(false);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching permission details:', error);
+        });
+    }
+    setValue('allow_ids', []);
+  }, [permissionId, dataProvider, setValue]);
+
+  useEffect(() => {
+    setValue('allow_ids', []);
+  }, [isAllAllowed, setValue]);
+
+  const getReference = () => {
+    return resourceName || 'staff';
+  };
+
+  const onSubmit = async ({ permission_id, is_allowed_all, allow_ids }) => {
+    await staffAPIProvider.assignPermission({
+      staff_id: recordId,
+      permission_id,
+      is_allowed_all: isAllowedAllPermission
+        ? true
+        : is_allowed_all === undefined
+          ? false
+          : is_allowed_all,
+      allow_ids,
+    });
+
+    setValue('permission_id', '');
+    setValue('is_allowed_all');
+    setValue('allow_ids', []);
+    refresh();
+  };
+
+  return (
+    <>
+      <Typography variant="h6">
+        {translate('resources.staff.show.labels.assign_permissions_lbl')}
+      </Typography>
+      <ReferenceInput source="permission_id" reference="permission" />
+      {!isAllowedAllPermission && (
+        <BooleanInput
+          name="is_allowed_all"
+          label="All Allowed"
+          source="is_allowed_all"
+        />
+      )}
+      {!isAllowedAllPermission && !isAllAllowed && (
+        <ReferenceArrayInput source="allow_ids" reference={getReference()}>
+          <AutocompleteArrayInput optionText={(choice) => `#${choice.id}`} />
+        </ReferenceArrayInput>
+      )}
+
+      <Button
+        startIcon={<SaveIcon />}
+        label={translate('resources.staff.show.fields.assign_btn_name')}
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit(onSubmit)}
+      />
+    </>
+  );
+};
 
 const StaffInformationTab = () => {
   return (
@@ -24,6 +131,7 @@ const StaffInformationTab = () => {
       <TextInput source="department" />
       <ReferenceInput source="position_id" reference="staff-position" />
       <TextInput source="bio" multiline resettable />
+      <SaveButton />
     </>
   );
 };
@@ -35,6 +143,7 @@ const StaffPermissionTab = () => {
     <>
       {record && !record.is_root && (
         <>
+          <PermissionAssignForm />
           <Typography variant="h6">
             {translate('resources.staff.show.labels.assigned_permission_lbl')}
           </Typography>
@@ -189,6 +298,9 @@ const StaffHistoryTab = () => {
 };
 
 export const StaffEdit = () => {
+  const recordId = useGetRecordId();
+  const authProvider = useAuthProvider();
+  const navigate = useNavigate();
   const transform = (data) => {
     if (data.user_id) delete data.user_id;
     if (data.password) delete data.password;
@@ -200,9 +312,23 @@ export const StaffEdit = () => {
     return data;
   };
 
+  useEffect(() => {
+    const fetchAllowIds = async () => {
+      const ids = await authProvider.getAllowIds({
+        resource: 'staff',
+        action: 'edit',
+      });
+      if (recordId && ids.length && !ids.includes(+recordId)) {
+        navigate('/access-denied');
+      }
+    };
+
+    fetchAllowIds();
+  }, [authProvider, recordId, navigate]);
+
   return (
     <Edit transform={transform} mutationMode="pessimistic">
-      <TabbedForm>
+      <TabbedForm toolbar={false}>
         <TabbedForm.Tab label="resources.staff.tabs.info">
           <StaffInformationTab />
         </TabbedForm.Tab>

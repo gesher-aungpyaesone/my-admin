@@ -69,11 +69,29 @@ export const authProvider = {
 
     const permissions = authProvider.getStaffPermissions();
     if (!permissions.length) return false;
-    return permissions.some(
+    return permissions.some((perm) => {
+      if (perm.permission.resource.name === resource) {
+        if (
+          perm.permission.type.name === 'read' &&
+          (action === 'list' || action === 'show')
+        ) {
+          return true;
+        }
+        return perm.permission.type.name === action;
+      }
+      return false;
+    });
+  },
+
+  getAllowIds: ({ resource, action }) => {
+    const permissions = authProvider.getStaffPermissions();
+    if (!permissions.length) return [];
+    const permission = permissions.find(
       (perm) =>
         perm.permission.resource.name === resource &&
         perm.permission.type.name === action,
     );
+    return permission.allow_ids ? permission.allow_ids : [];
   },
 
   async getIdentity() {

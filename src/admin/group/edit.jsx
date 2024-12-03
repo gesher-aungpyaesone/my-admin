@@ -7,6 +7,7 @@ import {
   Pagination,
   ReferenceField,
   ReferenceManyField,
+  SaveButton,
   TabbedForm,
   TextField,
   TextInput,
@@ -18,6 +19,7 @@ const GroupInformationTab = () => {
     <>
       <TextInput source="name" />
       <TextInput source="description" />
+      <SaveButton />
     </>
   );
 };
@@ -181,7 +183,7 @@ export const GroupEdit = () => {
 
   return (
     <Edit transform={transform} mutationMode="pessimistic">
-      <TabbedForm>
+      <TabbedForm toolbar={false}>
         <TabbedForm.Tab label="resources.group.tabs.info">
           <GroupInformationTab />
         </TabbedForm.Tab>

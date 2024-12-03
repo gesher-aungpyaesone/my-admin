@@ -10,8 +10,10 @@ import {
   SimpleList,
   TextField,
   TopToolbar,
+  useAuthProvider,
 } from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const ListActions = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
@@ -25,10 +27,29 @@ const ListActions = () => {
 };
 
 export const StaffList = () => {
+  const authProvider = useAuthProvider();
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const [allowIds, setAllowIds] = useState([]);
 
+  useEffect(() => {
+    const fetchAllowIds = async () => {
+      const ids = await authProvider.getAllowIds({
+        resource: 'staff',
+        action: 'read',
+      });
+      setAllowIds(ids);
+    };
+
+    fetchAllowIds();
+  }, [authProvider]);
+
+  const filters = allowIds.length > 0 ? { id: allowIds } : {};
   return (
-    <List actions={<ListActions />} title="resources.staff.list">
+    <List
+      actions={<ListActions />}
+      title="resources.staff.list"
+      filter={filters}
+    >
       {isSmall ? (
         <SimpleList
           primaryText={(record) => record.first_name + ' ' + record.last_name}

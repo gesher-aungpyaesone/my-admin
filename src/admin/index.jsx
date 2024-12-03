@@ -35,7 +35,6 @@ const App = () => (
     <Resource
       name="staff"
       list={StaffList}
-      // show={StaffShow}
       edit={StaffEdit}
       create={StaffCreate}
       icon={FaceIcon}
@@ -43,7 +42,6 @@ const App = () => (
     <Resource
       name="group"
       list={GroupList}
-      // show={GroupShow}
       edit={GroupEdit}
       create={GroupCreate}
       icon={GroupIcon}

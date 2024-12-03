@@ -67,6 +67,29 @@ export const staffAPIProvider = {
     };
   },
 
+  assignPermission: async ({
+    staff_id,
+    permission_id,
+    is_allowed_all,
+    allow_ids,
+  }) => {
+    const url = `${apiUrl}/staff-permission`;
+    const response = await httpClient(url, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        staff_id,
+        permission_id,
+        is_allowed_all,
+        allow_ids,
+      }),
+    });
+    const { json } = response;
+    return {
+      data: json.data,
+    };
+  },
+
   // Assign permissions to a staff member
   assignPermissions: async (staffId, permissions) => {
     const url = `${apiUrl}/staff-permission`;
