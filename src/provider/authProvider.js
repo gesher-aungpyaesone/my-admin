@@ -48,6 +48,7 @@ export const authProvider = {
       localStorage.setItem('is_root', json.is_root);
       if (json.permissions)
         localStorage.setItem('permissions', JSON.stringify(json.permissions));
+      else localStorage.removeItem('permissions');
       if (json.staff) localStorage.setItem('staff', JSON.stringify(json.staff));
       return Promise.resolve();
     }

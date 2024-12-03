@@ -107,7 +107,11 @@ const PermissionAssignForm = () => {
       )}
       {!isAllowedAllPermission && !isAllAllowed && (
         <ReferenceArrayInput source="allow_ids" reference={getReference()}>
-          <AutocompleteArrayInput optionText={(choice) => `#${choice.id}`} />
+          <AutocompleteArrayInput
+            optionText={(choice) =>
+              `#${choice.id} ${choice.name ? choice.name : choice.first_name + ' ' + choice.last_name}`
+            }
+          />
         </ReferenceArrayInput>
       )}
 
@@ -144,9 +148,10 @@ const StaffPermissionTab = () => {
     <>
       {record && !record.is_root && (
         <>
-          {authProvider.canAccess({ resource: 'staff-permission', action: 'assign' }) && (
-            <PermissionAssignForm />
-          )}
+          {authProvider.canAccess({
+            resource: 'staff-permission',
+            action: 'assign',
+          }) && <PermissionAssignForm />}
           <Typography variant="h6">
             {translate('resources.staff.show.labels.assigned_permission_lbl')}
           </Typography>
