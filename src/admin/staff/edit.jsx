@@ -138,12 +138,15 @@ const StaffInformationTab = () => {
 
 const StaffPermissionTab = () => {
   const translate = useTranslate();
+  const authProvider = useAuthProvider();
   const record = useRecordContext();
   return (
     <>
       {record && !record.is_root && (
         <>
-          <PermissionAssignForm />
+          {authProvider.canAccess({ resource: 'staff-permission', action: 'assign' }) && (
+            <PermissionAssignForm />
+          )}
           <Typography variant="h6">
             {translate('resources.staff.show.labels.assigned_permission_lbl')}
           </Typography>
