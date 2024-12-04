@@ -119,7 +119,15 @@ const PermissionAssignForm = () => {
         <ReferenceArrayInput source="allow_ids" reference={getReference()}>
           <AutocompleteArrayInput
             optionText={(choice) =>
-              `#${choice.id} ${choice.name ? choice.name : choice.first_name + ' ' + choice.last_name}`
+              `#${choice.id} ${
+                choice.name
+                  ? choice.name
+                  : choice.first_name +
+                    ' ' +
+                    choice.last_name +
+                    ' | ' +
+                    choice.department
+              }`
             }
           />
         </ReferenceArrayInput>

@@ -161,11 +161,9 @@ export const StaffPositionEdit = () => {
           <TabbedForm.Tab label="resources.staff-position.tabs.info">
             <StaffPositionInformationTab />
           </TabbedForm.Tab>
-          {authProvider.canAccess({ resource: 'staff', action: 'read' }) && (
-            <TabbedForm.Tab label="resources.staff-position.tabs.member">
-              <MembersTab />
-            </TabbedForm.Tab>
-          )}
+          <TabbedForm.Tab label="resources.staff-position.tabs.member">
+            <MembersTab />
+          </TabbedForm.Tab>
           <TabbedForm.Tab label="resources.staff-position.tabs.history">
             <HistoryTab />
           </TabbedForm.Tab>
