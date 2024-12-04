@@ -95,12 +95,6 @@ const enfull = {
     group: {
       name: 'Group',
       list: 'Group List',
-      show: {
-        tab: {
-          detail: 'detail',
-          history: 'history',
-        },
-      },
       fields: {
         id: 'ID',
         name: 'Name',
@@ -115,6 +109,14 @@ const enfull = {
         permission: 'permission',
         member: 'member',
         history: 'history',
+      },
+      buttons: {
+        assign: 'assign',
+      },
+      labels: {
+        all_allowed: 'Are all records allowed?',
+        assign_permissions: 'Assign permissions',
+        assigned_permission: 'Assigned permissions',
       },
     },
   },

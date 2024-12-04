@@ -1,25 +1,14 @@
 import {
   DatagridConfigurable,
-  ExportButton,
   List,
   NumberField,
-  SelectColumnsButton,
   SimpleList,
   TextField,
-  TopToolbar,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
+import { ListActions } from '../../components/ListActions';
 
-const ListActions = () => {
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  return (
-    <TopToolbar>
-      {!isSmall && <SelectColumnsButton />}
-      <ExportButton />
-    </TopToolbar>
-  );
-};
 export const PermissionList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 

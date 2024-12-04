@@ -1,30 +1,16 @@
 import {
-  CreateButton,
   DatagridConfigurable,
   DateField,
   EmailField,
-  ExportButton,
   List,
   ReferenceField,
-  SelectColumnsButton,
   SimpleList,
   TextField,
-  TopToolbar,
   useAuthProvider,
 } from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
-
-const ListActions = () => {
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  return (
-    <TopToolbar>
-      {!isSmall && <SelectColumnsButton />}
-      <CreateButton />
-      <ExportButton />
-    </TopToolbar>
-  );
-};
+import { ListActions } from '../../components/ListActions';
 
 export const StaffList = () => {
   const authProvider = useAuthProvider();

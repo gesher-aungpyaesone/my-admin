@@ -96,12 +96,6 @@ const jpfull = {
     group: {
       name: 'グループ',
       list: 'グループ一覧',
-      show: {
-        tab: {
-          detail: '詳細',
-          history: '履歴',
-        },
-      },
       fields: {
         id: 'ID',
         name: '役職名',
@@ -116,6 +110,14 @@ const jpfull = {
         permission: '権限',
         member: 'メンバー',
         history: '履歴',
+      },
+      buttons: {
+        assign: '任命する',
+      },
+      labels: {
+        all_allowed: 'すべてのレコードは許可されますか？',
+        assign_permissions: '権限割り当て',
+        assigned_permission: '割り当てられた権限',
       },
     },
   },

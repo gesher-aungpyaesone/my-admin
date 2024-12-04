@@ -1,28 +1,14 @@
 import {
-  CreateButton,
   DatagridConfigurable,
   DateField,
-  ExportButton,
   List,
   ReferenceField,
-  SelectColumnsButton,
   SimpleList,
   TextField,
-  TopToolbar,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
-
-const ListActions = () => {
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  return (
-    <TopToolbar>
-      {!isSmall && <SelectColumnsButton />}
-      <CreateButton />
-      <ExportButton />
-    </TopToolbar>
-  );
-};
+import { ListActions } from '../../components/ListActions';
 
 export const GroupList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
