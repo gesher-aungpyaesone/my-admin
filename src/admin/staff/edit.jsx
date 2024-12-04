@@ -46,15 +46,10 @@ const PermissionAssignForm = () => {
       dataProvider
         .getOne('permission', { id: permissionId })
         .then(({ data }) => {
-          console.log(data);
           if (data && data.resource) {
             setResourceName(data.resource.name);
           }
-          if (
-            data &&
-            data.type &&
-            (data.type.name === 'create' || data.type.name === 'export')
-          ) {
+          if (data && data.type && data.type.name === 'create') {
             setIsAllowedAllPermission(true);
           } else {
             setIsAllowedAllPermission(false);

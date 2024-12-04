@@ -17,13 +17,6 @@ export const GroupCreate = () => {
             optionText={(choice) => `${choice.first_name} ${choice.last_name}`}
           />
         </ReferenceArrayInput>
-        <ReferenceArrayInput source="permission_ids" reference="permission">
-          <AutocompleteArrayInput
-            optionText={(choice) =>
-              `[${choice.resource.name}] ${choice.type.name}`
-            }
-          />
-        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );
