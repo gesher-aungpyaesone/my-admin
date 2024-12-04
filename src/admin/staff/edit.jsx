@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Edit,
   TextInput,
@@ -140,6 +141,30 @@ const StaffInformationTab = () => {
   );
 };
 
+const AllowIdUrlField = ({ source }) => {
+  const record = useRecordContext();
+  if (!record) return null;
+  if (record['is_allowed_all']) return <div>All</div>;
+  if (!record[source]) return <div>-</div>;
+  const ids = record[source];
+  const resourceName = record.permission.resource.name;
+  const typeName = record.permission.type.name;
+  const links = ids.map((id) => (
+    <a
+      key={id}
+      href={
+        typeName === 'read' ? `/#/${resourceName}` : `/#/${resourceName}/${id}`
+      }
+      style={{ marginRight: '4px' }}
+    >{`#${id}`}</a>
+  ));
+  return links;
+};
+
+AllowIdUrlField.propTypes = {
+  source: PropTypes.string.isRequired,
+};
+
 const StaffPermissionTab = () => {
   const translate = useTranslate();
   const authProvider = useAuthProvider();
@@ -167,7 +192,7 @@ const StaffPermissionTab = () => {
                 reference="permission"
                 label="resources.permission.fields.name"
               ></ReferenceField>
-
+              <AllowIdUrlField source="allow_ids" label="Access" />
               <ReferenceField
                 sortable={false}
                 source="permission.id"

@@ -15,7 +15,7 @@ import {
   useGetRecordId,
 } from 'react-admin';
 import { Box, Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const StaffPositionInformationTab = () => {
@@ -29,9 +29,26 @@ const StaffPositionInformationTab = () => {
 };
 
 const MembersTab = () => {
+  const authProvider = useAuthProvider();
+  const [allowIds, setAllowIds] = useState([]);
+
+  useEffect(() => {
+    const fetchAllowIds = async () => {
+      const ids = await authProvider.getAllowIds({
+        resource: 'staff',
+        action: 'read',
+      });
+      setAllowIds(ids);
+    };
+
+    fetchAllowIds();
+  }, [authProvider]);
+
+  const filters = allowIds.length > 0 ? { id: allowIds } : {};
   return (
     <>
       <ReferenceManyField
+        filter={filters}
         reference="staff"
         target="position_id"
         pagination={<Pagination sx={{ width: '100%' }} />}
