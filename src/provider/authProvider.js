@@ -21,7 +21,10 @@ export const authProvider = {
       localStorage.setItem('access_token', json.access_token);
       localStorage.setItem('is_root', json.is_root);
       if (json.permissions)
-        localStorage.setItem('permissions', JSON.stringify(json.permissions));
+        localStorage.setItem(
+          'permissions',
+          JSON.stringify(json.permissions.concat(json.groupPermissions)),
+        );
       if (json.staff) localStorage.setItem('staff', JSON.stringify(json.staff));
       return Promise.resolve();
     }
@@ -47,7 +50,10 @@ export const authProvider = {
     if (json) {
       localStorage.setItem('is_root', json.is_root);
       if (json.permissions)
-        localStorage.setItem('permissions', JSON.stringify(json.permissions));
+        localStorage.setItem(
+          'permissions',
+          JSON.stringify(json.permissions.concat(json.groupPermissions)),
+        );
       else localStorage.removeItem('permissions');
       if (json.staff) localStorage.setItem('staff', JSON.stringify(json.staff));
       return Promise.resolve();

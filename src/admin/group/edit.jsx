@@ -59,7 +59,11 @@ const PermissionAssignForm = () => {
           if (data && data.resource) {
             setResourceName(data.resource.name);
           }
-          if (data && data.type && data.type.name === 'create') {
+          if (
+            data &&
+            data.type &&
+            (data.type.name === 'create' || data.type.name === 'assign')
+          ) {
             setIsAllowedAllPermission(true);
           } else {
             setIsAllowedAllPermission(false);
@@ -94,6 +98,7 @@ const PermissionAssignForm = () => {
     setValue('permission_id', '');
     setValue('is_allowed_all');
     setValue('allow_ids', []);
+    setIsAllowedAllPermission(true);
     refresh();
   };
 
