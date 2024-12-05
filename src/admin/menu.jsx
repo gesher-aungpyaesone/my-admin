@@ -1,5 +1,6 @@
 import { Menu } from 'react-admin';
 import { useTheme } from '@mui/material/styles';
+import { SubMenu } from '../components/SubMenu';
 
 export const CustomMenu = () => {
   const theme = useTheme();
@@ -14,7 +15,13 @@ export const CustomMenu = () => {
       }}
     >
       <Menu.DashboardItem />
-      <Menu.ResourceItems />
+      <SubMenu text="menu.employee_management">
+        <Menu.ResourceItem name="staff" />
+        <Menu.ResourceItem name="group" />
+        <Menu.ResourceItem name="permission" />
+        <Menu.ResourceItem name="staff-department" />
+        <Menu.ResourceItem name="staff-position" />
+      </SubMenu>
     </Menu>
   );
 };

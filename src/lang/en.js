@@ -144,6 +144,9 @@ const enfull = {
       },
     },
   },
+  menu: {
+    employee_management: 'Employee Management',
+  },
   'Invalid Credentials': 'Invalid credentials. Please try again.',
   'staff not found': 'The staff has not been registered or has been deleted.',
 };

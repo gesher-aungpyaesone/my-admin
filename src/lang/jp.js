@@ -144,6 +144,9 @@ const jpfull = {
       },
     },
   },
+  menu: {
+    employee_management: '人事管理',
+  },
   'Invalid Credentials': '認証情報が無効です。再試行してください。',
   'staff not found': 'スタッフは登録されていないか、削除されています。',
 };
