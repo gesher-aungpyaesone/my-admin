@@ -8,7 +8,7 @@ import { Collapse } from '@mui/material';
 import { useState } from 'react';
 import { useTranslate } from 'react-admin';
 
-export const SubMenu = ({ text, children }) => {
+export const SubMenu = ({ text, icon, children }) => {
   const translate = useTranslate();
   const [open, setOpen] = useState(false);
   const handleClick = () => {
@@ -19,7 +19,7 @@ export const SubMenu = ({ text, children }) => {
     <>
       <MenuItem onClick={handleClick}>
         <ListItemIcon sx={{ minWidth: '28px' }}>
-          {open ? <ExpandMoreIcon /> : <ExpandLess />}
+          {open ? <ExpandLess /> : icon ? icon : <ExpandMoreIcon />}
         </ListItemIcon>
         <ListItemText primary={translate(text)} />
       </MenuItem>
@@ -32,5 +32,6 @@ export const SubMenu = ({ text, children }) => {
 
 SubMenu.propTypes = {
   text: PropTypes.string.isRequired,
+  icon: PropTypes.node,
   children: PropTypes.node,
 };
