@@ -6,12 +6,15 @@ import {
   ReferenceField,
   DateField,
   useTranslate,
+  DeleteButton,
+  useAuthProvider,
 } from 'react-admin';
 import { Typography } from '@mui/material';
 import { AllowIdUrlField } from '../../../components/AllowIdUrlField';
 
 export const PermissionTable = () => {
   const translate = useTranslate();
+  const authProvider = useAuthProvider();
   return (
     <>
       <Typography variant="h6">
@@ -61,6 +64,10 @@ export const PermissionTable = () => {
             showTime
             transform={(value) => new Date(value * 1000)}
           />
+          {authProvider.canAccess({
+            resource: 'staff-permission',
+            action: 'assign',
+          }) && <DeleteButton redirect={false} />}
         </Datagrid>
       </ReferenceManyField>
     </>

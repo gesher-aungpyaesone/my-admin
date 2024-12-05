@@ -1,16 +1,19 @@
 import {
   Datagrid,
   DateField,
+  DeleteButton,
   EmailField,
   Pagination,
   ReferenceManyField,
   TextField,
+  useAuthProvider,
   useTranslate,
 } from 'react-admin';
 import { Typography } from '@mui/material';
 
 export const MemberTable = () => {
   const translate = useTranslate();
+  const authProvider = useAuthProvider();
   return (
     <>
       <Typography variant="h6">
@@ -22,7 +25,6 @@ export const MemberTable = () => {
         pagination={<Pagination sx={{ width: '100%' }} />}
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
-          <TextField source="id" />
           <TextField
             source="staff.first_name"
             label="resources.staff.fields.first_name"
@@ -46,6 +48,10 @@ export const MemberTable = () => {
             showTime
             transform={(value) => new Date(value * 1000)}
           />
+          {authProvider.canAccess({
+            resource: 'staff-group',
+            action: 'assign',
+          }) && <DeleteButton redirect={false} />}
         </Datagrid>
       </ReferenceManyField>
     </>

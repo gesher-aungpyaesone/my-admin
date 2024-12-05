@@ -6,11 +6,14 @@ import {
   ReferenceField,
   DateField,
   useTranslate,
+  DeleteButton,
+  useAuthProvider,
 } from 'react-admin';
 import { Typography } from '@mui/material';
 
 export const GroupTable = () => {
   const translate = useTranslate();
+  const authProvider = useAuthProvider();
   return (
     <>
       <Typography variant="h6">
@@ -43,6 +46,10 @@ export const GroupTable = () => {
             showTime
             transform={(value) => new Date(value * 1000)}
           />
+          {authProvider.canAccess({
+            resource: 'staff-group',
+            action: 'assign',
+          }) && <DeleteButton redirect={false} />}
         </Datagrid>
       </ReferenceManyField>
     </>
