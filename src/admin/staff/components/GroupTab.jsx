@@ -14,7 +14,7 @@ export const GroupTab = () => {
   return (
     <>
       <Typography variant="h6">
-        {translate('resources.staff.show.labels.assigned_group_lbl')}
+        {translate('resources.staff.labels.assigned_group')}
       </Typography>
       <ReferenceManyField
         reference="staff-group"

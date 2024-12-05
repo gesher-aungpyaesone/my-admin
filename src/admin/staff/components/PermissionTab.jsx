@@ -18,7 +18,7 @@ export const PermissionTab = () => {
         </>
       )}
       {record && record.is_root && (
-        <p>{translate('resources.staff.messages.root_access_msg')}</p>
+        <p>{translate('resources.staff.messages.root_access')}</p>
       )}
     </>
   );

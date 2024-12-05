@@ -83,7 +83,7 @@ export const PermissionAssignForm = () => {
   return (
     <>
       <Typography variant="h6">
-        {translate('resources.staff.show.labels.assign_permissions_lbl')}
+        {translate('resources.staff.labels.assign_permissions')}
       </Typography>
       <ReferenceInput source="permission_id" reference="permission" />
       {!isAllowedAllPermission && (
@@ -113,7 +113,7 @@ export const PermissionAssignForm = () => {
 
       <Button
         startIcon={<SaveIcon />}
-        label={translate('resources.staff.show.fields.assign_btn_name')}
+        label={translate('resources.staff.buttons.assign')}
         variant="contained"
         color="primary"
         onClick={handleSubmit(onSubmit)}

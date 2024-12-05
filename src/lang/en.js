@@ -25,23 +25,6 @@ const enfull = {
     staff: {
       name: 'Staff',
       list: 'Staff List',
-      show: {
-        tab: {
-          profile: 'profile',
-          permission: 'permission',
-          history: 'history',
-        },
-        fields: {
-          permissions: 'Permissions',
-          assign_btn_name: 'Assign',
-        },
-        labels: {
-          assign_permissions_lbl: 'Assign permissions',
-          assigned_permission_lbl: 'Assigned permissions',
-          assign_groups_lbl: 'Assign groups',
-          assigned_group_lbl: 'Assigned groups',
-        },
-      },
       fields: {
         id: 'ID',
         first_name: 'First Name',
@@ -61,8 +44,18 @@ const enfull = {
         group: 'group',
         history: 'history',
       },
+      buttons: {
+        assign: 'assign',
+      },
+      labels: {
+        all_allowed: 'Are all records allowed?',
+        assign_permissions: 'Assign permissions',
+        assigned_permission: 'Assigned permissions',
+        assign_groups: 'Assign groups',
+        assigned_group: 'Assigned groups',
+      },
       messages: {
-        root_access_msg: 'You have root access. You can access everything.',
+        root_access: 'This is root staff. Full access granted.',
       },
     },
     'staff-position': {

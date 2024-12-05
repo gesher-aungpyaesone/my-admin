@@ -15,7 +15,7 @@ export const PermissionTable = () => {
   return (
     <>
       <Typography variant="h6">
-        {translate('resources.staff.show.labels.assigned_permission_lbl')}
+        {translate('resources.staff.labels.assigned_permission')}
       </Typography>
       <ReferenceManyField
         reference="staff-permission"
