@@ -1,26 +1,25 @@
 import {
-  useTranslate,
-  Datagrid,
-  DateField,
-  Pagination,
-  ReferenceField,
   ReferenceManyField,
+  Pagination,
+  Datagrid,
   TextField,
+  ReferenceField,
+  DateField,
+  useTranslate,
 } from 'react-admin';
 import { Typography } from '@mui/material';
 import { AllowIdUrlField } from '../../../components/AllowIdUrlField';
 
 export const PermissionTable = () => {
   const translate = useTranslate();
-
   return (
     <>
       <Typography variant="h6">
-        {translate('resources.group.labels.assigned_permission')}
+        {translate('resources.staff.show.labels.assigned_permission_lbl')}
       </Typography>
       <ReferenceManyField
-        reference="group-permission"
-        target="group_id"
+        reference="staff-permission"
+        target="staff_id"
         pagination={<Pagination sx={{ width: '100%' }} />}
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
