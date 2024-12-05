@@ -1,131 +1,10 @@
-import {
-  Datagrid,
-  DateField,
-  Edit,
-  EmailField,
-  Labeled,
-  Pagination,
-  ReferenceField,
-  ReferenceManyField,
-  SaveButton,
-  TabbedForm,
-  TextField,
-  TextInput,
-  useAuthProvider,
-  useGetRecordId,
-} from 'react-admin';
-import { Box, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Edit, TabbedForm, useAuthProvider, useGetRecordId } from 'react-admin';
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const StaffPositionInformationTab = () => {
-  return (
-    <>
-      <TextInput source="name" />
-      <TextInput source="description" />
-      <SaveButton />
-    </>
-  );
-};
-
-const MembersTab = () => {
-  const authProvider = useAuthProvider();
-  const [allowIds, setAllowIds] = useState([]);
-
-  useEffect(() => {
-    const fetchAllowIds = async () => {
-      const ids = await authProvider.getAllowIds({
-        resource: 'staff',
-        action: 'read',
-      });
-      setAllowIds(ids);
-    };
-
-    fetchAllowIds();
-  }, [authProvider]);
-
-  const filters = allowIds.length > 0 ? { id: allowIds } : {};
-  return (
-    <>
-      <ReferenceManyField
-        filter={filters}
-        reference="staff"
-        target="position_id"
-        pagination={<Pagination sx={{ width: '100%' }} />}
-      >
-        <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
-          <TextField source="id" />
-          <TextField source="first_name" />
-          <TextField source="last_name" />
-          <EmailField source="email" />
-          <TextField source="department" />
-          <DateField
-            sortBy="created_at"
-            label="resources.staff.fields.created_at"
-            source="created_at.seconds.low"
-            showTime
-            transform={(value) => new Date(value * 1000)}
-          />
-        </Datagrid>
-      </ReferenceManyField>
-    </>
-  );
-};
-
-const HistoryTab = () => {
-  return (
-    <>
-      <Box sx={{ display: 'block' }}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Labeled>
-              <ReferenceField
-                source="created_by_id"
-                reference="user"
-                link={false}
-              >
-                <TextField source="staff.first_name" />{' '}
-                <TextField source="staff.last_name" />
-              </ReferenceField>
-            </Labeled>
-          </Grid>
-          <Grid item xs={8}>
-            <Labeled>
-              <DateField
-                source="created_at.seconds.low"
-                label="resources.staff-position.fields.created_at"
-                showTime
-                transform={(value) => new Date(value * 1000)}
-              />
-            </Labeled>
-          </Grid>
-          <Grid item xs={4}>
-            <Labeled>
-              <ReferenceField
-                source="updated_by_id"
-                reference="user"
-                link={false}
-              >
-                <TextField source="staff.first_name" />{' '}
-                <TextField source="staff.last_name" />
-              </ReferenceField>
-            </Labeled>
-          </Grid>
-          <Grid item xs={8}>
-            <Labeled>
-              <DateField
-                source="updated_at.seconds.low"
-                label="resources.staff-position.fields.updated_at"
-                showTime
-                transform={(value) => new Date(value * 1000)}
-              />
-            </Labeled>
-          </Grid>
-        </Grid>
-      </Box>
-    </>
-  );
-};
+import { InformationTab } from './components/InformationTab';
+import { MemberTab } from './components/MemberTab';
+import { HistoryTab } from './components/HistoryTab';
 
 export const StaffPositionEdit = () => {
   const recordId = useGetRecordId();
@@ -159,10 +38,10 @@ export const StaffPositionEdit = () => {
       <Edit transform={transform} mutationMode="pessimistic">
         <TabbedForm toolbar={false}>
           <TabbedForm.Tab label="resources.staff-position.tabs.info">
-            <StaffPositionInformationTab />
+            <InformationTab />
           </TabbedForm.Tab>
           <TabbedForm.Tab label="resources.staff-position.tabs.member">
-            <MembersTab />
+            <MemberTab />
           </TabbedForm.Tab>
           <TabbedForm.Tab label="resources.staff-position.tabs.history">
             <HistoryTab />

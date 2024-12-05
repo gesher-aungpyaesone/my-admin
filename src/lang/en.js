@@ -61,12 +61,6 @@ const enfull = {
     'staff-position': {
       name: 'Staff Position',
       list: 'Staff Position List',
-      show: {
-        tab: {
-          detail: 'detail',
-          history: 'history',
-        },
-      },
       tabs: {
         info: 'information',
         member: 'member',

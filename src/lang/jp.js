@@ -25,21 +25,6 @@ const jpfull = {
     staff: {
       name: 'スタッフ',
       list: 'スタッフ一覧',
-      show: {
-        tab: {
-          profile: 'プロフィール',
-          permission: '権限',
-          history: '履歴',
-        },
-        fields: {
-          permissions: '権限',
-          assign_btn_name: '任命する',
-        },
-        labels: {
-          assign_permissions_lbl: '権限割り当て',
-          assigned_permission_lbl: '割り当てられた権限',
-        },
-      },
       fields: {
         id: 'ID',
         first_name: '名',
@@ -76,12 +61,6 @@ const jpfull = {
     'staff-position': {
       name: '役職',
       list: '役職一覧',
-      show: {
-        tab: {
-          detail: '詳細',
-          history: '履歴',
-        },
-      },
       tabs: {
         info: '基本情報',
         member: 'メンバー',
