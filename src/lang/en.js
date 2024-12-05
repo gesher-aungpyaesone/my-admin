@@ -12,6 +12,7 @@ const enfull = {
       fields: {
         id: 'ID',
         name: 'Name',
+        allow_ids: 'Access',
         resource: {
           name: 'Resource',
         },

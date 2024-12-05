@@ -1,11 +1,15 @@
 import {
   AutocompleteInput,
+  DeleteButton,
   ReferenceInput,
   SaveButton,
   TextInput,
+  useRecordContext,
 } from 'react-admin';
+import { Box } from '@mui/material';
 
 export const InformationTab = () => {
+  const record = useRecordContext();
   return (
     <>
       <TextInput source="first_name" />
@@ -22,7 +26,10 @@ export const InformationTab = () => {
         />
       </ReferenceInput>
       <TextInput source="bio" multiline resettable />
-      <SaveButton />
+      <Box display={'flex'} gap={'10px'}>
+        <SaveButton />
+        {record && !record.is_root && <DeleteButton variant="contained" />}
+      </Box>
     </>
   );
 };

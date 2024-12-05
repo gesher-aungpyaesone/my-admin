@@ -12,6 +12,7 @@ const jpfull = {
       fields: {
         id: 'ID',
         name: '名前',
+        allow_ids: 'アクセス',
         resource: {
           name: 'リソース',
         },

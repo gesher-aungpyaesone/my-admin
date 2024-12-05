@@ -49,8 +49,16 @@ export const StaffList = () => {
           <TextField source="last_name" />
           <EmailField source="email" />
           <TextField source="is_root" />
-          <ReferenceField source="department_id" reference="staff-department" />
-          <ReferenceField source="position_id" reference="staff-position" />
+          <TextField
+            source="department.name"
+            sortBy="department_id"
+            label="resources.staff.fields.department_id"
+          />
+          <TextField
+            source="position.name"
+            sortBy="position_id"
+            label="resources.staff.fields.position_id"
+          />
           <DateField
             source="created_at.seconds.low"
             label="resources.staff.fields.created_at"

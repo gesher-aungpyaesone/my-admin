@@ -33,7 +33,11 @@ export const PermissionTable = () => {
             reference="permission"
             label="resources.permission.fields.name"
           ></ReferenceField>
-          <AllowIdUrlField source="allow_ids" label="Access" />
+          <AllowIdUrlField
+            sortable={false}
+            source="allow_ids"
+            label="resources.permission.fields.allow_ids"
+          />
           <ReferenceField
             sortable={false}
             source="permission.id"

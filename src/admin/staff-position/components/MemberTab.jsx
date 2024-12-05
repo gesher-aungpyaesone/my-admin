@@ -3,7 +3,6 @@ import {
   DateField,
   EmailField,
   Pagination,
-  ReferenceField,
   ReferenceManyField,
   TextField,
   useAuthProvider,
@@ -40,7 +39,12 @@ export const MemberTab = () => {
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />
-          <ReferenceField source="department_id" reference="staff-department" />
+
+          <TextField
+            sortBy="department_id"
+            source="department.name"
+            label="resources.staff.fields.department_id"
+          />
           <DateField
             sortBy="created_at"
             label="resources.staff.fields.created_at"

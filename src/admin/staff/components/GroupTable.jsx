@@ -25,12 +25,11 @@ export const GroupTable = () => {
         pagination={<Pagination sx={{ width: '100%' }} />}
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
-          <ReferenceField
+          <TextField
             sortBy="group_id"
-            source="group.id"
-            reference="group"
+            source="group.name"
             label="resources.group.fields.name"
-          ></ReferenceField>
+          ></TextField>
           <ReferenceField
             source="created_by_id"
             reference="user"

@@ -4,7 +4,6 @@ import {
   DeleteButton,
   EmailField,
   Pagination,
-  ReferenceField,
   ReferenceManyField,
   TextField,
   useAuthProvider,
@@ -27,20 +26,23 @@ export const MemberTable = () => {
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
           <TextField
+            sortable={false}
             source="staff.first_name"
             label="resources.staff.fields.first_name"
           />
           <TextField
+            sortable={false}
             source="staff.last_name"
             label="resources.staff.fields.last_name"
           />
           <EmailField
+            sortable={false}
             source="staff.email"
             label="resources.staff.fields.email"
           />
-          <ReferenceField
-            source="staff.department_id"
-            reference="staff-department"
+          <TextField
+            sortable={false}
+            source="staff.department.name"
             label="resources.staff.fields.department_id"
           />
           <DateField
