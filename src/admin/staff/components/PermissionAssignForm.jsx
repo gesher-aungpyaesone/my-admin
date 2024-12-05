@@ -8,8 +8,9 @@ import {
   useDataProvider,
   useGetRecordId,
   useRefresh,
+  AutocompleteInput,
 } from 'react-admin';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -31,9 +32,7 @@ export const PermissionAssignForm = () => {
       dataProvider
         .getOne('permission', { id: permissionId })
         .then(({ data }) => {
-          if (data && data.resource) {
-            setResourceName(data.resource.name);
-          }
+          if (data && data.resource) setResourceName(data.resource.name);
           if (
             data &&
             data.type &&
@@ -43,9 +42,6 @@ export const PermissionAssignForm = () => {
           } else {
             setIsAllowedAllPermission(false);
           }
-        })
-        .catch((error) => {
-          console.error('Error fetching permission details:', error);
         });
     }
     setValue('allow_ids', []);
@@ -55,11 +51,7 @@ export const PermissionAssignForm = () => {
     setValue('allow_ids', []);
   }, [isAllAllowed, setValue]);
 
-  const getReference = () => {
-    console.log(resourceName);
-
-    return resourceName || 'staff';
-  };
+  const getReference = () => resourceName || 'staff';
 
   const onSubmit = async ({ permission_id, is_allowed_all, allow_ids }) => {
     await staffAPIProvider.assignPermission({
@@ -81,11 +73,21 @@ export const PermissionAssignForm = () => {
   };
 
   return (
-    <>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      width={'100%'}
+      marginBottom={'14px'}
+    >
       <Typography variant="h6">
         {translate('resources.staff.labels.assign_permissions')}
       </Typography>
-      <ReferenceInput source="permission_id" reference="permission" />
+      <ReferenceInput source="permission_id" reference="permission">
+        <AutocompleteInput
+          label="resources.permission.name"
+          optionText={(choice) => `#${choice.id} ${choice.name}`}
+        />
+      </ReferenceInput>
       {!isAllowedAllPermission && (
         <BooleanInput
           name="is_allowed_all"
@@ -112,12 +114,12 @@ export const PermissionAssignForm = () => {
       )}
 
       <Button
+        sx={{ width: 'fit-content' }}
         startIcon={<SaveIcon />}
         label={translate('resources.staff.buttons.assign')}
         variant="contained"
-        color="primary"
         onClick={handleSubmit(onSubmit)}
       />
-    </>
+    </Box>
   );
 };

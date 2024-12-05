@@ -52,7 +52,9 @@ const jpfull = {
         assign_permissions: '権限割り当て',
         assigned_permission: '割り当てられた権限',
         assign_groups: 'グループの割り当て',
-        assigned_group: '割り当てられたグループ',
+        assigned_groups: '割り当てられたグループ',
+        assign_staffs: 'スタッフの割り当て',
+        assigned_staffs: '割り当てられたスタッフ',
       },
       messages: {
         root_access: 'こちらはルートスタッフです。全てにアクセス可能です。',

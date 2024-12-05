@@ -70,7 +70,6 @@ const LoginPage = () => {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
               fullWidth
               style={{ padding: '10px' }}
             >

@@ -52,7 +52,9 @@ const enfull = {
         assign_permissions: 'Assign permissions',
         assigned_permission: 'Assigned permissions',
         assign_groups: 'Assign groups',
-        assigned_group: 'Assigned groups',
+        assigned_groups: 'Assigned groups',
+        assign_staffs: 'Assign staffs',
+        assigned_staffs: 'Assigned staffs',
       },
       messages: {
         root_access: 'This is root staff. Full access granted.',

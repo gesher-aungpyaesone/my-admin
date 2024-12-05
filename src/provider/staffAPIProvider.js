@@ -107,6 +107,22 @@ export const staffAPIProvider = {
     };
   },
 
+  assignGroup: async ({ staff_id, group_id }) => {
+    const url = `${apiUrl}/staff-group`;
+    const response = await httpClient(url, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        staff_id,
+        group_id,
+      }),
+    });
+    const { json } = response;
+    return {
+      data: json.data,
+    };
+  },
+
   // Fetch user details (for created_by_id in permissions)
   getUsersByIds: async (userIds) => {
     const query = {

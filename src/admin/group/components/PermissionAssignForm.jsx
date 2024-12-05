@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   AutocompleteArrayInput,
+  AutocompleteInput,
   BooleanInput,
   Button,
   ReferenceArrayInput,
@@ -41,9 +42,6 @@ export const PermissionAssignForm = () => {
           } else {
             setIsAllowedAllPermission(false);
           }
-        })
-        .catch((error) => {
-          console.error('Error fetching permission details:', error);
         });
     }
     setValue('allow_ids', []);
@@ -83,7 +81,12 @@ export const PermissionAssignForm = () => {
       <Typography variant="h6">
         {translate('resources.group.labels.assign_permissions')}
       </Typography>
-      <ReferenceInput source="permission_id" reference="permission" />
+      <ReferenceInput source="permission_id" reference="permission">
+        <AutocompleteInput
+          label="resources.permission.name"
+          optionText={(choice) => `#${choice.id} ${choice.name}`}
+        />
+      </ReferenceInput>
       {!isAllowedAllPermission && (
         <BooleanInput
           name="is_allowed_all"
@@ -114,7 +117,6 @@ export const PermissionAssignForm = () => {
         startIcon={<SaveIcon />}
         label={translate('resources.group.buttons.assign')}
         variant="contained"
-        color="primary"
         onClick={handleSubmit(onSubmit)}
       />
     </Box>
