@@ -5,6 +5,7 @@ import FaceIcon from '@mui/icons-material/Face';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import { i18nProvider } from '../provider/i18nProvider';
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -19,6 +20,9 @@ import { PermissionList } from './permission/list';
 import { GroupList } from './group/list';
 import { GroupEdit } from './group/edit';
 import { GroupCreate } from './group/create';
+import { StaffDepartmentList } from './staff-department/list';
+import { StaffDepartmentEdit } from './staff-department/edit';
+import { StaffDepartmentCreate } from './staff-department/create';
 
 const App = () => (
   <Admin
@@ -46,7 +50,6 @@ const App = () => (
       create={GroupCreate}
       icon={GroupIcon}
     />
-
     <Resource
       name="staff-position"
       list={StaffPositionList}
@@ -54,7 +57,13 @@ const App = () => (
       create={StaffPositionCreate}
       icon={PortraitIcon}
     />
-
+    <Resource
+      name="staff-department"
+      list={StaffDepartmentList}
+      edit={StaffDepartmentEdit}
+      create={StaffDepartmentCreate}
+      icon={WorkspacesIcon}
+    />
     <Resource name="permission" list={PermissionList} icon={VerifiedIcon} />
   </Admin>
 );

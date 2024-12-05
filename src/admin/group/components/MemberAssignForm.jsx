@@ -41,7 +41,7 @@ export const MemberAssignForm = () => {
         <AutocompleteInput
           label="resources.staff.name"
           optionText={(choice) =>
-            `#${choice.id} ${choice.first_name} ${choice.last_name} | ${choice.department}`
+            `#${choice.id} ${choice.first_name} ${choice.last_name} | ${choice.position.name} | ${choice.department.name}`
           }
         />
       </ReferenceInput>

@@ -31,8 +31,8 @@ const jpfull = {
         last_name: '姓',
         email: 'メール',
         is_root: 'ルート',
-        department: '部署',
-        position_id: '役職',
+        department_id: '部署',
+        position_id: '部署',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
@@ -61,8 +61,8 @@ const jpfull = {
       },
     },
     'staff-position': {
-      name: '役職',
-      list: '役職一覧',
+      name: '部署',
+      list: '部署一覧',
       tabs: {
         info: '基本情報',
         member: 'メンバー',
@@ -70,15 +70,36 @@ const jpfull = {
       },
       fields: {
         id: 'ID',
-        name: '役職名',
-        description: '役職説明',
+        name: '部署名',
+        description: '部署説明',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
         updated_by_id: '更新者',
       },
       titles: {
-        create: '役職作成',
+        create: '部署作成',
+      },
+    },
+    'staff-department': {
+      name: '部署',
+      list: '部署一覧',
+      tabs: {
+        info: '基本情報',
+        member: 'メンバー',
+        history: '履歴',
+      },
+      fields: {
+        id: 'ID',
+        name: '部署名',
+        description: '部署説明',
+        created_at: '作成日時',
+        updated_at: '更新日時',
+        created_by_id: '作成者',
+        updated_by_id: '更新者',
+      },
+      titles: {
+        create: '部署作成',
       },
     },
     group: {
@@ -86,8 +107,8 @@ const jpfull = {
       list: 'グループ一覧',
       fields: {
         id: 'ID',
-        name: '役職名',
-        description: '役職説明',
+        name: '部署名',
+        description: '部署説明',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',

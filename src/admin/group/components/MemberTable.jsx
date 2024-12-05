@@ -4,6 +4,7 @@ import {
   DeleteButton,
   EmailField,
   Pagination,
+  ReferenceField,
   ReferenceManyField,
   TextField,
   useAuthProvider,
@@ -37,9 +38,10 @@ export const MemberTable = () => {
             source="staff.email"
             label="resources.staff.fields.email"
           />
-          <TextField
-            source="staff.department"
-            label="resources.staff.fields.department"
+          <ReferenceField
+            source="staff.department_id"
+            reference="staff-department"
+            label="resources.staff.fields.department_id"
           />
           <DateField
             sortBy="created_at"

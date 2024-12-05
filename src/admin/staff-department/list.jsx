@@ -1,18 +1,18 @@
 import {
   DatagridConfigurable,
   DateField,
-  EmailField,
   List,
+  ListActions,
   ReferenceField,
   SimpleList,
   TextField,
   useAuthProvider,
 } from 'react-admin';
+
 import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { ListActions } from '../../components/ListActions';
 
-export const StaffList = () => {
+export const StaffDepartmentList = () => {
   const authProvider = useAuthProvider();
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [allowIds, setAllowIds] = useState([]);
@@ -20,7 +20,7 @@ export const StaffList = () => {
   useEffect(() => {
     const fetchAllowIds = async () => {
       const ids = await authProvider.getAllowIds({
-        resource: 'staff',
+        resource: 'staff-department',
         action: 'read',
       });
       setAllowIds(ids);
@@ -33,34 +33,29 @@ export const StaffList = () => {
   return (
     <List
       actions={<ListActions />}
-      title="resources.staff.list"
+      title="resources.staff-department.list"
       filter={filters}
     >
       {isSmall ? (
         <SimpleList
-          primaryText={(record) => record.first_name + ' ' + record.last_name}
-          secondaryText={(record) => record.email}
-          tertiaryText={(record) => record.department}
+          primaryText={(record) => record.name}
+          secondaryText={(record) => record.description}
         />
       ) : (
         <DatagridConfigurable>
           <TextField source="id" />
-          <TextField source="first_name" />
-          <TextField source="last_name" />
-          <EmailField source="email" />
-          <TextField source="is_root" />
-          <ReferenceField source="department_id" reference="staff-department" />
-          <ReferenceField source="position_id" reference="staff-position" />
+          <TextField source="name" />
+          <TextField source="description" />
           <DateField
             source="created_at.seconds.low"
-            label="resources.staff.fields.created_at"
+            label="resources.staff-department.fields.created_at"
             showTime
             sortBy="created_at"
             transform={(value) => new Date(value * 1000)}
           />
           <DateField
             source="updated_at.seconds.low"
-            label="resources.staff.fields.updated_at"
+            label="resources.staff-department.fields.updated_at"
             showTime
             sortBy="updated_at"
             transform={(value) => new Date(value * 1000)}

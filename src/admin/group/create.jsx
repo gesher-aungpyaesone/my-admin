@@ -15,7 +15,7 @@ export const GroupCreate = () => {
         <ReferenceArrayInput source="staff_ids" reference="staff">
           <AutocompleteArrayInput
             optionText={(choice) =>
-              `#${choice.id} ${choice.first_name} ${choice.last_name} | ${choice.department}`
+              `#${choice.id} ${choice.first_name} ${choice.last_name} | ${choice.position.name} | ${choice.department.name}`
             }
           />
         </ReferenceArrayInput>

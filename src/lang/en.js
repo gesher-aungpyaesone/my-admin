@@ -31,7 +31,7 @@ const enfull = {
         last_name: 'Last Name',
         email: 'Email',
         is_root: 'Root',
-        department: 'Department',
+        department_id: 'Department',
         position_id: 'Position',
         created_at: 'Created At',
         updated_at: 'Updated At',
@@ -61,8 +61,8 @@ const enfull = {
       },
     },
     'staff-position': {
-      name: 'Staff Position',
-      list: 'Staff Position List',
+      name: 'Position',
+      list: 'Position List',
       tabs: {
         info: 'information',
         member: 'member',
@@ -78,7 +78,28 @@ const enfull = {
         updated_by_id: 'Updated By',
       },
       titles: {
-        create: 'Create Staff Position',
+        create: 'Create Position',
+      },
+    },
+    'staff-department': {
+      name: 'Department',
+      list: 'Department List',
+      tabs: {
+        info: 'information',
+        member: 'member',
+        history: 'history',
+      },
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        description: 'Description',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+      titles: {
+        create: 'Create Department',
       },
     },
     group: {

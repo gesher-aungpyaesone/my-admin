@@ -102,11 +102,7 @@ export const PermissionAssignForm = () => {
               `#${choice.id} ${
                 choice.name
                   ? choice.name
-                  : choice.first_name +
-                    ' ' +
-                    choice.last_name +
-                    ' | ' +
-                    choice.department
+                  : `${choice.first_name} ${choice.last_name} | ${choice.department.name}`
               }`
             }
           />

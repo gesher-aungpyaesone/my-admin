@@ -32,7 +32,7 @@ export const MemberTab = () => {
       <ReferenceManyField
         filter={filters}
         reference="staff"
-        target="position_id"
+        target="department_id"
         pagination={<Pagination sx={{ width: '100%' }} />}
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
@@ -40,7 +40,7 @@ export const MemberTab = () => {
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />
-          <ReferenceField source="department_id" reference="staff-department" />
+          <ReferenceField source="position_id" reference="staff-position" />
           <DateField
             sortBy="created_at"
             label="resources.staff.fields.created_at"
