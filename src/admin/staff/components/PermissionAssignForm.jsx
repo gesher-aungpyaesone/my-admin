@@ -22,6 +22,7 @@ export const PermissionAssignForm = () => {
   const refresh = useRefresh();
   const isAllAllowed = useWatch({ name: 'is_allowed_all' });
   const permissionId = useWatch({ name: 'permission_id' });
+  const [typeName, setTypeName] = useState('');
   const [resourceName, setResourceName] = useState(null);
   const [isAllowedAllPermission, setIsAllowedAllPermission] = useState(true);
   const dataProvider = useDataProvider();
@@ -42,6 +43,7 @@ export const PermissionAssignForm = () => {
           } else {
             setIsAllowedAllPermission(false);
           }
+          setTypeName(data.type.name);
         });
     }
     setValue('allow_ids', []);
@@ -58,7 +60,9 @@ export const PermissionAssignForm = () => {
       staff_id: recordId,
       permission_id,
       is_allowed_all: isAllowedAllPermission
-        ? true
+        ? typeName === 'create'
+          ? false
+          : true
         : is_allowed_all === undefined
           ? false
           : is_allowed_all,

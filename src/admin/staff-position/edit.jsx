@@ -1,15 +1,10 @@
-import { Edit, TabbedForm, useAuthProvider, useGetRecordId } from 'react-admin';
+import { Edit, TabbedForm } from 'react-admin';
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { InformationTab } from './components/InformationTab';
 import { MemberTab } from './components/MemberTab';
 import { HistoryTab } from './components/HistoryTab';
 
 export const StaffPositionEdit = () => {
-  const recordId = useGetRecordId();
-  const authProvider = useAuthProvider();
-  const navigate = useNavigate();
   const transform = (data) => {
     if (data.created_at) delete data.created_at;
     if (data.updated_at) delete data.updated_at;
@@ -18,20 +13,6 @@ export const StaffPositionEdit = () => {
     if (data.updated_by_id) delete data.updated_by_id;
     return data;
   };
-
-  useEffect(() => {
-    const fetchAllowIds = async () => {
-      const ids = await authProvider.getAllowIds({
-        resource: 'staff-position',
-        action: 'read',
-      });
-      if (recordId && ids.length && !ids.includes(+recordId)) {
-        navigate('/access-denied');
-      }
-    };
-
-    fetchAllowIds();
-  }, [authProvider, recordId, navigate]);
 
   return (
     <Box>

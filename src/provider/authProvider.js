@@ -92,18 +92,31 @@ export const authProvider = {
 
   getAllowIds: ({ resource, action }) => {
     const permissions = authProvider.getStaffPermissions();
-    if (!permissions.length) return [];
+    if (!permissions.length)
+      return {
+        allow_ids: [],
+        is_allowed_all: true,
+      };
     const permission = permissions.find(
       (perm) =>
         perm.permission.resource.name === resource &&
         perm.permission.type.name === action,
     );
-    return permission.allow_ids ? permission.allow_ids : [];
+    if (!permission) {
+      return {
+        allow_ids: [],
+        is_allowed_all: false,
+      };
+    }
+    return {
+      allow_ids: permission.allow_ids ? permission.allow_ids : [],
+      is_allowed_all: permission.is_allowed_all,
+    };
   },
 
   async getIdentity() {
     const authCredentials = JSON.parse(localStorage.getItem('staff'));
-    const { id, first_name, last_name } = authCredentials;
-    return { id, fullName: `${first_name} ${last_name}` };
+    const { first_name, last_name, user_id } = authCredentials;
+    return { id: user_id, fullName: `${first_name} ${last_name}` };
   },
 };

@@ -12,20 +12,23 @@ import { useEffect, useState } from 'react';
 export const MemberTab = () => {
   const authProvider = useAuthProvider();
   const [allowIds, setAllowIds] = useState([]);
+  const [isAllowedAll, setIsAllowedAll] = useState(true);
 
   useEffect(() => {
     const fetchAllowIds = async () => {
-      const ids = await authProvider.getAllowIds({
+      const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
         resource: 'staff',
         action: 'read',
       });
-      setAllowIds(ids);
+      setAllowIds(allow_ids);
+      setIsAllowedAll(is_allowed_all);
     };
 
     fetchAllowIds();
   }, [authProvider]);
 
   const filters = allowIds.length > 0 ? { id: allowIds } : {};
+  filters['is_allowed_all'] = isAllowedAll ? 1 : 0;
   return (
     <>
       <ReferenceManyField

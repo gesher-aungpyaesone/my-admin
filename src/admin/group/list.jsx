@@ -5,16 +5,41 @@ import {
   ReferenceField,
   SimpleList,
   TextField,
+  useAuthProvider,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { ListActions } from '../../components/ListActions';
+import { useEffect, useState } from 'react';
 
 export const GroupList = () => {
+  const authProvider = useAuthProvider();
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const [allowIds, setAllowIds] = useState([]);
+  const [isAllowedAll, setIsAllowedAll] = useState(true);
+
+  useEffect(() => {
+    const fetchAllowIds = async () => {
+      const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
+        resource: 'group',
+        action: 'read',
+      });
+      setAllowIds(allow_ids);
+      setIsAllowedAll(is_allowed_all);
+    };
+
+    fetchAllowIds();
+  }, [authProvider]);
+
+  const filters = allowIds.length > 0 ? { id: allowIds } : {};
+  filters['is_allowed_all'] = isAllowedAll ? 1 : 0;
 
   return (
-    <List actions={<ListActions />} title="resources.group.list">
+    <List
+      actions={<ListActions />}
+      title="resources.group.list"
+      filter={filters}
+    >
       {isSmall ? (
         <SimpleList
           primaryText={(record) => record.name}

@@ -16,20 +16,23 @@ export const StaffPositionList = () => {
   const authProvider = useAuthProvider();
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [allowIds, setAllowIds] = useState([]);
+  const [isAllowedAll, setIsAllowedAll] = useState(true);
 
   useEffect(() => {
     const fetchAllowIds = async () => {
-      const ids = await authProvider.getAllowIds({
+      const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
         resource: 'staff-position',
         action: 'read',
       });
-      setAllowIds(ids);
+      setAllowIds(allow_ids);
+      setIsAllowedAll(is_allowed_all);
     };
 
     fetchAllowIds();
   }, [authProvider]);
 
   const filters = allowIds.length > 0 ? { id: allowIds } : {};
+  filters['is_allowed_all'] = isAllowedAll ? 1 : 0;
   return (
     <List
       actions={<ListActions />}
