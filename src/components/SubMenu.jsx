@@ -5,15 +5,34 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse } from '@mui/material';
-import { useState } from 'react';
-import { useTranslate } from 'react-admin';
+import { useState, useEffect } from 'react';
+import { useAuthProvider, useTranslate } from 'react-admin';
 
-export const SubMenu = ({ text, icon, children }) => {
+export const SubMenu = ({ text, icon, access, children }) => {
   const translate = useTranslate();
+  const authProvider = useAuthProvider();
   const [open, setOpen] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false);
+
   const handleClick = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    const checkAccess = async () => {
+      const accessGranted = await Promise.all(
+        access.map((resource) =>
+          authProvider.canAccess({ resource, action: 'read' }),
+        ),
+      );
+      setHasAccess(accessGranted.includes(true));
+    };
+
+    checkAccess();
+  }, [access, authProvider]);
+  if (!hasAccess) {
+    return null;
+  }
 
   return (
     <>
@@ -34,4 +53,5 @@ SubMenu.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.node,
   children: PropTypes.node,
+  access: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

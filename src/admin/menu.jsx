@@ -22,7 +22,17 @@ export const CustomMenu = () => {
       }}
     >
       <Menu.DashboardItem />
-      <SubMenu text="menu.employee_management" icon={<ManageAccountsIcon />}>
+      <SubMenu
+        text="menu.employee_management"
+        icon={<ManageAccountsIcon />}
+        access={[
+          'staff',
+          'group',
+          'permission',
+          'staff-department',
+          'staff-position',
+        ]}
+      >
         <CustomResourceItem name="staff" icon={<FaceIcon />} />
         <CustomResourceItem name="group" icon={<GroupIcon />} />
         <CustomResourceItem name="permission" icon={<VerifiedIcon />} />
