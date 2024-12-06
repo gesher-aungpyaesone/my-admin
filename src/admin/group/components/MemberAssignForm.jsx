@@ -37,7 +37,11 @@ export const MemberAssignForm = () => {
       <Typography variant="h6">
         {translate('resources.staff.labels.assign_staffs')}
       </Typography>
-      <ReferenceInput source="staff_id" reference="staff">
+      <ReferenceInput
+        source="staff_id"
+        reference="staff"
+        filter={{ exclude: 1 }}
+      >
         <AutocompleteInput
           label="resources.staff.name"
           optionText={(choice) =>
