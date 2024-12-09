@@ -22,7 +22,7 @@ export const HistoryTab = () => {
             <Labeled>
               <DateField
                 source="created_at.seconds.low"
-                label="resources.language.fields.created_at"
+                label="resources.ads-language.fields.created_at"
                 showTime
                 transform={(value) => new Date(value * 1000)}
               />
@@ -44,7 +44,7 @@ export const HistoryTab = () => {
             <Labeled>
               <DateField
                 source="updated_at.seconds.low"
-                label="resources.language.fields.updated_at"
+                label="resources.ads-language.fields.updated_at"
                 showTime
                 transform={(value) => new Date(value * 1000)}
               />

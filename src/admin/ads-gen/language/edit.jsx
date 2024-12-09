@@ -15,10 +15,10 @@ export const LanguageEdit = () => {
   return (
     <Edit transform={transform} mutationMode="pessimistic">
       <TabbedForm toolbar={false}>
-        <TabbedForm.Tab label="resources.language.tabs.info">
+        <TabbedForm.Tab label="resources.ads-language.tabs.info">
           <InformationTab />
         </TabbedForm.Tab>
-        <TabbedForm.Tab label="resources.language.tabs.history">
+        <TabbedForm.Tab label="resources.ads-language.tabs.history">
           <HistoryTab />
         </TabbedForm.Tab>
       </TabbedForm>

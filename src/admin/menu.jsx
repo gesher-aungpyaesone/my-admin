@@ -46,9 +46,9 @@ export const CustomMenu = () => {
       <SubMenu
         text="menu.ads_gen_ai"
         icon={<TextFieldsIcon />}
-        access={['language']}
+        access={['ads-language']}
       >
-        <CustomResourceItem name="language" icon={<TranslateIcon />} />
+        <CustomResourceItem name="ads-language" icon={<TranslateIcon />} />
       </SubMenu>
     </Menu>
   );

@@ -74,7 +74,7 @@ const App = () => (
     <Resource name="permission" list={PermissionList} icon={VerifiedIcon} />
 
     <Resource
-      name="language"
+      name="ads-language"
       list={LanguageList}
       edit={LanguageEdit}
       create={LanguageCreate}

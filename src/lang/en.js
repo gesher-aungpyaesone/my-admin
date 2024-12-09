@@ -130,7 +130,7 @@ const enfull = {
         assigned_permission: 'Assigned permissions',
       },
     },
-    language: {
+    'ads-language': {
       name: 'Language',
       list: 'Language List',
       fields: {

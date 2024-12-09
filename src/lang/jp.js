@@ -124,7 +124,7 @@ const jpfull = {
         assigned_permission: '割り当てられた権限',
       },
     },
-    language: {
+    'ads-language': {
       name: '言語',
       list: '言語一覧',
       fields: {

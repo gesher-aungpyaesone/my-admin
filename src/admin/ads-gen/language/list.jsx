@@ -21,7 +21,7 @@ export const LanguageList = () => {
   useEffect(() => {
     const fetchAllowIds = async () => {
       const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
-        resource: 'language',
+        resource: 'ads-language',
         action: 'read',
       });
       setAllowIds(allow_ids);
@@ -37,7 +37,7 @@ export const LanguageList = () => {
   return (
     <List
       actions={<ListActions />}
-      title="resources.language.list"
+      title="resources.ads-language.list"
       filter={filters}
     >
       {isSmall ? (
@@ -52,14 +52,14 @@ export const LanguageList = () => {
           <TextField source="description" />
           <DateField
             source="created_at.seconds.low"
-            label="resources.language.fields.created_at"
+            label="resources.ads-language.fields.created_at"
             showTime
             sortBy="created_at"
             transform={(value) => new Date(value * 1000)}
           />
           <DateField
             source="updated_at.seconds.low"
-            label="resources.language.fields.updated_at"
+            label="resources.ads-language.fields.updated_at"
             showTime
             sortBy="updated_at"
             transform={(value) => new Date(value * 1000)}
