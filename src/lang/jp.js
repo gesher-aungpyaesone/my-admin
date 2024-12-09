@@ -33,7 +33,7 @@ const jpfull = {
         email: 'メール',
         is_root: 'ルート',
         department_id: '部署',
-        position_id: '部署',
+        position_id: '位置',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
@@ -62,8 +62,8 @@ const jpfull = {
       },
     },
     'staff-position': {
-      name: '部署',
-      list: '部署一覧',
+      name: '位置',
+      list: '位置一覧',
       tabs: {
         info: '基本情報',
         member: 'メンバー',
@@ -71,15 +71,12 @@ const jpfull = {
       },
       fields: {
         id: 'ID',
-        name: '部署名',
-        description: '部署説明',
+        name: '名',
+        description: '説明',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
         updated_by_id: '更新者',
-      },
-      titles: {
-        create: '部署作成',
       },
     },
     'staff-department': {
@@ -92,15 +89,12 @@ const jpfull = {
       },
       fields: {
         id: 'ID',
-        name: '部署名',
-        description: '部署説明',
+        name: '名',
+        description: '説明',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
         updated_by_id: '更新者',
-      },
-      titles: {
-        create: '部署作成',
       },
     },
     group: {
@@ -108,8 +102,8 @@ const jpfull = {
       list: 'グループ一覧',
       fields: {
         id: 'ID',
-        name: '部署名',
-        description: '部署説明',
+        name: '名',
+        description: '説明',
         created_at: '作成日時',
         updated_at: '更新日時',
         created_by_id: '作成者',
@@ -130,6 +124,23 @@ const jpfull = {
         assigned_permission: '割り当てられた権限',
       },
     },
+    language: {
+      name: '言語',
+      list: '言語一覧',
+      fields: {
+        id: 'ID',
+        name: '名',
+        description: '説明',
+        created_at: '作成日時',
+        updated_at: '更新日時',
+        created_by_id: '作成者',
+        updated_by_id: '更新者',
+      },
+      tabs: {
+        info: '基本情報',
+        history: '履歴',
+      },
+    },
   },
   pages: {
     auth: {
@@ -146,6 +157,7 @@ const jpfull = {
   },
   menu: {
     employee_management: '人事管理',
+    ads_gen_ai: '広告生成AI',
   },
   'Invalid Credentials': '認証情報が無効です。再試行してください。',
   'staff not found': 'スタッフは登録されていないか、削除されています。',

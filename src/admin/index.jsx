@@ -8,6 +8,7 @@ import PortraitIcon from '@mui/icons-material/Portrait';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -26,6 +27,9 @@ import { GroupCreate } from './auth/group/create';
 import { StaffDepartmentList } from './auth/staff-department/list';
 import { StaffDepartmentEdit } from './auth/staff-department/edit';
 import { StaffDepartmentCreate } from './auth/staff-department/create';
+import { LanguageList } from './ads-gen/language/list';
+import { LanguageEdit } from './ads-gen/language/edit';
+import { LanguageCreate } from './ads-gen/language/create';
 
 const App = () => (
   <Admin
@@ -68,6 +72,14 @@ const App = () => (
       icon={WorkspacesIcon}
     />
     <Resource name="permission" list={PermissionList} icon={VerifiedIcon} />
+
+    <Resource
+      name="language"
+      list={LanguageList}
+      edit={LanguageEdit}
+      create={LanguageCreate}
+      icon={TranslateIcon}
+    />
   </Admin>
 );
 

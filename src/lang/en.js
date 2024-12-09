@@ -130,6 +130,23 @@ const enfull = {
         assigned_permission: 'Assigned permissions',
       },
     },
+    language: {
+      name: 'Language',
+      list: 'Language List',
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        description: 'Description',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+      tabs: {
+        info: 'information',
+        history: 'history',
+      },
+    },
   },
   pages: {
     auth: {
@@ -146,6 +163,7 @@ const enfull = {
   },
   menu: {
     employee_management: 'Employee Management',
+    ads_gen_ai: 'Ads Generative AI',
   },
   'Invalid Credentials': 'Invalid credentials. Please try again.',
   'staff not found': 'The staff has not been registered or has been deleted.',

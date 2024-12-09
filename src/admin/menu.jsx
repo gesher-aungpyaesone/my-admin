@@ -1,13 +1,16 @@
 import { Menu } from 'react-admin';
 import { useTheme } from '@mui/material/styles';
 import { SubMenu } from '@component/SubMenu';
+import { CustomResourceItem } from '@component/CustomResourceItem';
+
 import FaceIcon from '@mui/icons-material/Face';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import { CustomResourceItem } from '@component/CustomResourceItem';
+import TextFieldsIcon from '@mui/icons-material/TextFields';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 export const CustomMenu = () => {
   const theme = useTheme();
@@ -38,6 +41,14 @@ export const CustomMenu = () => {
         <CustomResourceItem name="permission" icon={<VerifiedIcon />} />
         <CustomResourceItem name="staff-department" icon={<WorkspacesIcon />} />
         <CustomResourceItem name="staff-position" icon={<PortraitIcon />} />
+      </SubMenu>
+
+      <SubMenu
+        text="menu.ads_gen_ai"
+        icon={<TextFieldsIcon />}
+        access={['language']}
+      >
+        <CustomResourceItem name="language" icon={<TranslateIcon />} />
       </SubMenu>
     </Menu>
   );
