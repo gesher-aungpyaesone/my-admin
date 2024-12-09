@@ -9,7 +9,7 @@ import {
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
-import { ListActions } from '../../components/ListActions';
+import { ListActions } from '@component/ListActions';
 import { useEffect, useState } from 'react';
 
 export const GroupList = () => {

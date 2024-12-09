@@ -10,7 +10,7 @@ import {
   useAuthProvider,
 } from 'react-admin';
 import { Typography } from '@mui/material';
-import { AllowIdUrlField } from '../../../components/AllowIdUrlField';
+import { AllowIdUrlField } from '@component/AllowIdUrlField';
 
 export const PermissionTable = () => {
   const translate = useTranslate();

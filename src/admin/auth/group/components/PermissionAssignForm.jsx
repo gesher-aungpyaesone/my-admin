@@ -14,7 +14,7 @@ import {
 import { Box, Typography } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { groupAPIProvider } from '../../../provider/groupAPIProvider';
+import { groupAPIProvider } from '@provider/groupAPIProvider';
 
 export const PermissionAssignForm = () => {
   const translate = useTranslate();

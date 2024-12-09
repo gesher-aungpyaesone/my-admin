@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@provider/*": ["src/provider/*"],
+      "@component/*": ["src/component/*"]
+    }
+  }
+}

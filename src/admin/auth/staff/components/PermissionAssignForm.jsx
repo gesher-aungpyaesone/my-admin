@@ -14,7 +14,7 @@ import { Box, Typography } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { staffAPIProvider } from '../../../provider/staffAPIProvider';
+import { staffAPIProvider } from '@provider/staffAPIProvider';
 
 export const PermissionAssignForm = () => {
   const translate = useTranslate();

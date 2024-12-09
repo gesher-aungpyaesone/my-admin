@@ -1,28 +1,31 @@
 import { Admin, nanoDarkTheme, nanoLightTheme, Resource } from 'react-admin';
-import { dataAPIProvider } from '../provider/dataAPIProvider';
-import { StaffList } from './staff/list';
+import { dataAPIProvider } from '@provider/dataAPIProvider';
+import { authProvider } from '@provider/authProvider';
+import { i18nProvider } from '@provider/i18nProvider';
+
 import FaceIcon from '@mui/icons-material/Face';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import { i18nProvider } from '../provider/i18nProvider';
+
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
-import { StaffEdit } from './staff/edit';
-import { StaffPositionList } from './staff-position/list';
-import { StaffCreate } from './staff/create';
-import { StaffPositionCreate } from './staff-position/create';
-import { StaffPositionEdit } from './staff-position/edit';
-import LoginPage from './auth/login';
-import { authProvider } from '../provider/authProvider';
-import { PermissionList } from './permission/list';
-import { GroupList } from './group/list';
-import { GroupEdit } from './group/edit';
-import { GroupCreate } from './group/create';
-import { StaffDepartmentList } from './staff-department/list';
-import { StaffDepartmentEdit } from './staff-department/edit';
-import { StaffDepartmentCreate } from './staff-department/create';
+
+import { StaffList } from './auth/staff/list';
+import { StaffEdit } from './auth/staff/edit';
+import { StaffPositionList } from './auth/staff-position/list';
+import { StaffCreate } from './auth/staff/create';
+import { StaffPositionCreate } from './auth/staff-position/create';
+import { StaffPositionEdit } from './auth/staff-position/edit';
+import LoginPage from './auth/staff-auth/login';
+import { PermissionList } from './auth/permission/list';
+import { GroupList } from './auth/group/list';
+import { GroupEdit } from './auth/group/edit';
+import { GroupCreate } from './auth/group/create';
+import { StaffDepartmentList } from './auth/staff-department/list';
+import { StaffDepartmentEdit } from './auth/staff-department/edit';
+import { StaffDepartmentCreate } from './auth/staff-department/create';
 
 const App = () => (
   <Admin

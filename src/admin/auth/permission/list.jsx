@@ -7,7 +7,7 @@ import {
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
-import { ListActions } from '../../components/ListActions';
+import { ListActions } from '@component/ListActions';
 
 export const PermissionList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));

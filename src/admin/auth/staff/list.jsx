@@ -10,7 +10,7 @@ import {
 } from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { ListActions } from '../../components/ListActions';
+import { ListActions } from '@component/ListActions';
 
 export const StaffList = () => {
   const authProvider = useAuthProvider();

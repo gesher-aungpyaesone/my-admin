@@ -1,13 +1,13 @@
 import { Menu } from 'react-admin';
 import { useTheme } from '@mui/material/styles';
-import { SubMenu } from '../components/SubMenu';
+import { SubMenu } from '@component/SubMenu';
 import FaceIcon from '@mui/icons-material/Face';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import { CustomResourceItem } from '../components/CustomResourceItem';
+import { CustomResourceItem } from '@component/CustomResourceItem';
 
 export const CustomMenu = () => {
   const theme = useTheme();

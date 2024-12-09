@@ -9,7 +9,7 @@ import {
 import { Box, Typography } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { useFormContext } from 'react-hook-form';
-import { staffAPIProvider } from '../../../provider/staffAPIProvider';
+import { staffAPIProvider } from '@provider/staffAPIProvider';
 
 export const GroupAssignForm = () => {
   const translate = useTranslate();
