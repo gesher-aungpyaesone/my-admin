@@ -34,6 +34,9 @@ import { LanguageCreate } from './ads-gen/language/create';
 import { PlatformList } from './ads-gen/platform/list';
 import { PlatformEdit } from './ads-gen/platform/edit';
 import { PlatformCreate } from './ads-gen/platform/create';
+import { ToneList } from './ads-gen/tone/list';
+import { ToneCreate } from './ads-gen/tone/create';
+import { ToneEdit } from './ads-gen/tone/edit';
 
 const App = () => (
   <Admin
@@ -90,6 +93,14 @@ const App = () => (
       list={PlatformList}
       edit={PlatformEdit}
       create={PlatformCreate}
+      icon={ShareIcon}
+    />
+
+    <Resource
+      name="ads-tone"
+      list={ToneList}
+      edit={ToneEdit}
+      create={ToneCreate}
       icon={ShareIcon}
     />
   </Admin>
