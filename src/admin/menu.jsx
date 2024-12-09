@@ -11,6 +11,7 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
 import TranslateIcon from '@mui/icons-material/Translate';
+import ShareIcon from '@mui/icons-material/Share';
 
 export const CustomMenu = () => {
   const theme = useTheme();
@@ -46,9 +47,10 @@ export const CustomMenu = () => {
       <SubMenu
         text="menu.ads_gen_ai"
         icon={<TextFieldsIcon />}
-        access={['ads-language']}
+        access={['ads-language', 'ads-platform']}
       >
         <CustomResourceItem name="ads-language" icon={<TranslateIcon />} />
+        <CustomResourceItem name="ads-platform" icon={<ShareIcon />} />
       </SubMenu>
     </Menu>
   );

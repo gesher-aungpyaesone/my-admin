@@ -9,6 +9,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import TranslateIcon from '@mui/icons-material/Translate';
+import ShareIcon from '@mui/icons-material/Share';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -30,6 +31,9 @@ import { StaffDepartmentCreate } from './auth/staff-department/create';
 import { LanguageList } from './ads-gen/language/list';
 import { LanguageEdit } from './ads-gen/language/edit';
 import { LanguageCreate } from './ads-gen/language/create';
+import { PlatformList } from './ads-gen/platform/list';
+import { PlatformEdit } from './ads-gen/platform/edit';
+import { PlatformCreate } from './ads-gen/platform/create';
 
 const App = () => (
   <Admin
@@ -79,6 +83,14 @@ const App = () => (
       edit={LanguageEdit}
       create={LanguageCreate}
       icon={TranslateIcon}
+    />
+
+    <Resource
+      name="ads-platform"
+      list={PlatformList}
+      edit={PlatformEdit}
+      create={PlatformCreate}
+      icon={ShareIcon}
     />
   </Admin>
 );
