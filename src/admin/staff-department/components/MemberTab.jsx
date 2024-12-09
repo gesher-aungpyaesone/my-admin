@@ -5,34 +5,12 @@ import {
   Pagination,
   ReferenceManyField,
   TextField,
-  useAuthProvider,
 } from 'react-admin';
-import { useEffect, useState } from 'react';
 
 export const MemberTab = () => {
-  const authProvider = useAuthProvider();
-  const [allowIds, setAllowIds] = useState([]);
-  const [isAllowedAll, setIsAllowedAll] = useState(true);
-
-  useEffect(() => {
-    const fetchAllowIds = async () => {
-      const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
-        resource: 'staff',
-        action: 'read',
-      });
-      setAllowIds(allow_ids);
-      setIsAllowedAll(is_allowed_all);
-    };
-
-    fetchAllowIds();
-  }, [authProvider]);
-
-  const filters = allowIds.length > 0 ? { id: allowIds } : {};
-  filters['is_allowed_all'] = isAllowedAll ? 1 : 0;
   return (
     <>
       <ReferenceManyField
-        filter={filters}
         reference="staff"
         target="department_id"
         pagination={<Pagination sx={{ width: '100%' }} />}
