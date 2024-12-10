@@ -14,6 +14,7 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import GrainIcon from '@mui/icons-material/Grain';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import ModeStandbySharpIcon from '@mui/icons-material/ModeStandbySharp';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -50,6 +51,9 @@ import { CompanySizeCreate } from './ads-gen/company-size/create';
 import { CompanyTypeList } from './ads-gen/company-type/list';
 import { CompanyTypeEdit } from './ads-gen/company-type/edit';
 import { CompanyTypeCreate } from './ads-gen/company-type/create';
+import { TargetList } from './ads-gen/target/list';
+import { TargetEdit } from './ads-gen/target/edit';
+import { TargetCreate } from './ads-gen/target/create';
 
 const App = () => (
   <Admin
@@ -115,6 +119,14 @@ const App = () => (
       edit={ToneEdit}
       create={ToneCreate}
       icon={RecordVoiceOverIcon}
+    />
+
+    <Resource
+      name="ads-target"
+      list={TargetList}
+      edit={TargetEdit}
+      create={TargetCreate}
+      icon={ModeStandbySharpIcon}
     />
 
     <Resource
