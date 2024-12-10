@@ -15,6 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import GrainIcon from '@mui/icons-material/Grain';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 export const CustomMenu = () => {
   const theme = useTheme();
@@ -56,6 +57,7 @@ export const CustomMenu = () => {
           'ads-tone',
           'ads-industry',
           'ads-company-size',
+          'ads-company-type',
         ]}
       >
         <CustomResourceItem name="ads-language" icon={<TranslateIcon />} />
@@ -63,6 +65,7 @@ export const CustomMenu = () => {
         <CustomResourceItem name="ads-tone" icon={<RecordVoiceOverIcon />} />
         <CustomResourceItem name="ads-industry" icon={<WarehouseIcon />} />
         <CustomResourceItem name="ads-company-size" icon={<GrainIcon />} />
+        <CustomResourceItem name="ads-company-type" icon={<AssessmentIcon />} />
       </SubMenu>
     </Menu>
   );

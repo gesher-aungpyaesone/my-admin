@@ -215,6 +215,23 @@ const enfull = {
         history: 'history',
       },
     },
+    'ads-company-type': {
+      name: 'Company Type',
+      list: 'Company Type List',
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        description: 'Description',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+      tabs: {
+        info: 'information',
+        history: 'history',
+      },
+    },
   },
   pages: {
     auth: {

@@ -13,6 +13,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import GrainIcon from '@mui/icons-material/Grain';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -46,6 +47,9 @@ import { IndustryCreate } from './ads-gen/industry/create';
 import { CompanySizeList } from './ads-gen/company-size/list';
 import { CompanySizeEdit } from './ads-gen/company-size/edit';
 import { CompanySizeCreate } from './ads-gen/company-size/create';
+import { CompanyTypeList } from './ads-gen/company-type/list';
+import { CompanyTypeEdit } from './ads-gen/company-type/edit';
+import { CompanyTypeCreate } from './ads-gen/company-type/create';
 
 const App = () => (
   <Admin
@@ -127,6 +131,14 @@ const App = () => (
       edit={CompanySizeEdit}
       create={CompanySizeCreate}
       icon={GrainIcon}
+    />
+
+    <Resource
+      name="ads-company-type"
+      list={CompanyTypeList}
+      edit={CompanyTypeEdit}
+      create={CompanyTypeCreate}
+      icon={AssessmentIcon}
     />
   </Admin>
 );
