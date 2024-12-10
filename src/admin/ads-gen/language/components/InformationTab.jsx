@@ -21,7 +21,7 @@ export const InformationTab = () => {
   useEffect(() => {
     const fetchAllowIds = async () => {
       const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
-        resource: 'staff',
+        resource: 'ads-language',
         action: 'edit',
       });
       if (!is_allowed_all) {
