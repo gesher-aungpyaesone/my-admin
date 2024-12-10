@@ -12,6 +12,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import ShareIcon from '@mui/icons-material/Share';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
+import GrainIcon from '@mui/icons-material/Grain';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -42,6 +43,9 @@ import { ToneEdit } from './ads-gen/tone/edit';
 import { IndustryList } from './ads-gen/industry/list';
 import { IndustryEdit } from './ads-gen/industry/edit';
 import { IndustryCreate } from './ads-gen/industry/create';
+import { CompanySizeList } from './ads-gen/company-size/list';
+import { CompanySizeEdit } from './ads-gen/company-size/edit';
+import { CompanySizeCreate } from './ads-gen/company-size/create';
 
 const App = () => (
   <Admin
@@ -115,6 +119,14 @@ const App = () => (
       edit={IndustryEdit}
       create={IndustryCreate}
       icon={WarehouseIcon}
+    />
+
+    <Resource
+      name="ads-company-size"
+      list={CompanySizeList}
+      edit={CompanySizeEdit}
+      create={CompanySizeCreate}
+      icon={GrainIcon}
     />
   </Admin>
 );
