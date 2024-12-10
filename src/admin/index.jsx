@@ -10,6 +10,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import TranslateIcon from '@mui/icons-material/Translate';
 import ShareIcon from '@mui/icons-material/Share';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import WarehouseIcon from '@mui/icons-material/Warehouse';
 
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
@@ -37,6 +39,9 @@ import { PlatformCreate } from './ads-gen/platform/create';
 import { ToneList } from './ads-gen/tone/list';
 import { ToneCreate } from './ads-gen/tone/create';
 import { ToneEdit } from './ads-gen/tone/edit';
+import { IndustryList } from './ads-gen/industry/list';
+import { IndustryEdit } from './ads-gen/industry/edit';
+import { IndustryCreate } from './ads-gen/industry/create';
 
 const App = () => (
   <Admin
@@ -101,7 +106,15 @@ const App = () => (
       list={ToneList}
       edit={ToneEdit}
       create={ToneCreate}
-      icon={ShareIcon}
+      icon={RecordVoiceOverIcon}
+    />
+
+    <Resource
+      name="ads-industry"
+      list={IndustryList}
+      edit={IndustryEdit}
+      create={IndustryCreate}
+      icon={WarehouseIcon}
     />
   </Admin>
 );

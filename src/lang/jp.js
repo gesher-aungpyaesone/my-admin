@@ -175,6 +175,23 @@ const jpfull = {
         history: '履歴',
       },
     },
+    'ads-industry': {
+      name: '業界',
+      list: '業界一覧',
+      fields: {
+        id: 'ID',
+        name: '名',
+        description: '説明',
+        created_at: '作成日時',
+        updated_at: '更新日時',
+        created_by_id: '作成者',
+        updated_by_id: '更新者',
+      },
+      tabs: {
+        info: '基本情報',
+        history: '履歴',
+      },
+    },
   },
   pages: {
     auth: {
