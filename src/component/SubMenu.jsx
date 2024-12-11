@@ -11,7 +11,7 @@ import { useAuthProvider, useTranslate } from 'react-admin';
 export const SubMenu = ({ text, icon, access, children }) => {
   const translate = useTranslate();
   const authProvider = useAuthProvider();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
 
   const handleClick = () => {

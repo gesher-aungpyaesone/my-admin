@@ -1,18 +1,19 @@
 import {
   DatagridConfigurable,
   DateField,
-  EmailField,
   List,
   ReferenceField,
   SimpleList,
   TextField,
+  UrlField,
   useAuthProvider,
 } from 'react-admin';
-import { useMediaQuery } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { ListActions } from '@component/ListActions';
 
-export const StaffList = () => {
+import { useMediaQuery } from '@mui/material';
+import { ListActions } from '@component/ListActions';
+import { useEffect, useState } from 'react';
+
+export const ClientCompanyList = () => {
   const authProvider = useAuthProvider();
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [allowIds, setAllowIds] = useState([]);
@@ -21,7 +22,7 @@ export const StaffList = () => {
   useEffect(() => {
     const fetchAllowIds = async () => {
       const { allow_ids, is_allowed_all } = await authProvider.getAllowIds({
-        resource: 'staff',
+        resource: 'ads-client-company',
         action: 'read',
       });
       setAllowIds(allow_ids);
@@ -37,42 +38,45 @@ export const StaffList = () => {
   return (
     <List
       actions={<ListActions />}
-      title="resources.staff.list"
+      title="resources.ads-client-company.list"
       filter={filters}
     >
       {isSmall ? (
         <SimpleList
-          primaryText={(record) => record.first_name + ' ' + record.last_name}
-          secondaryText={(record) => record.email}
-          tertiaryText={(record) => record.department.name}
+          primaryText={(record) => record.name}
+          secondaryText={(record) => record.website_url}
         />
       ) : (
         <DatagridConfigurable>
           <TextField source="id" />
-          <TextField source="first_name" />
-          <TextField source="last_name" />
-          <EmailField source="email" />
-          <TextField source="is_root" />
-          <TextField
-            source="department.name"
-            sortBy="department_id"
-            label="resources.staff.fields.department_id"
+          <TextField source="name" />
+          <UrlField source="website_url" />
+          <ReferenceField
+            source="industry_id"
+            reference="ads-industry"
+            link={false}
           />
-          <TextField
-            source="position.name"
-            sortBy="position_id"
-            label="resources.staff.fields.position_id"
+          <ReferenceField
+            source="type_id"
+            reference="ads-company-type"
+            link={false}
           />
+          <ReferenceField
+            source="size_id"
+            reference="ads-company-size"
+            link={false}
+          />
+          <TextField source="strength" />
           <DateField
             source="created_at.seconds.low"
-            label="resources.staff.fields.created_at"
+            label="resources.ads-client-company.fields.created_at"
             showTime
             sortBy="created_at"
             transform={(value) => new Date(value * 1000)}
           />
           <DateField
             source="updated_at.seconds.low"
-            label="resources.staff.fields.updated_at"
+            label="resources.ads-client-company.fields.updated_at"
             showTime
             sortBy="updated_at"
             transform={(value) => new Date(value * 1000)}

@@ -25,7 +25,7 @@ export const StaffCreate = () => {
             optionText={(choice) => `#${choice.id} ${choice.name}`}
           />
         </ReferenceInput>
-        <TextInput source="bio" multiline resettable />
+        <TextInput source="bio" multiline rows={3} />
       </SimpleForm>
     </Create>
   );

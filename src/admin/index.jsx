@@ -3,19 +3,6 @@ import { dataAPIProvider } from '@provider/dataAPIProvider';
 import { authProvider } from '@provider/authProvider';
 import { i18nProvider } from '@provider/i18nProvider';
 
-import FaceIcon from '@mui/icons-material/Face';
-import PortraitIcon from '@mui/icons-material/Portrait';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import GroupIcon from '@mui/icons-material/Group';
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import TranslateIcon from '@mui/icons-material/Translate';
-import ShareIcon from '@mui/icons-material/Share';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import WarehouseIcon from '@mui/icons-material/Warehouse';
-import GrainIcon from '@mui/icons-material/Grain';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import ModeStandbySharpIcon from '@mui/icons-material/ModeStandbySharp';
-
 import { CustomLayout } from './layout';
 import { Dashboard } from './dashboard';
 
@@ -55,6 +42,9 @@ import { TargetList } from './ads-gen/target/list';
 import { TargetEdit } from './ads-gen/target/edit';
 import { TargetCreate } from './ads-gen/target/create';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ClientCompanyList } from './ads-gen/client-company/list';
+import { ClientCompanyEdit } from './ads-gen/client-company/edit';
+import { ClientCompanyCreate } from './ads-gen/client-company/create';
 
 const App = () => (
   <Router>
@@ -69,42 +59,46 @@ const App = () => (
       theme={nanoLightTheme}
       darkTheme={nanoDarkTheme}
     >
+      {/* employee management */}
       <Resource
         name="staff"
         list={StaffList}
         edit={StaffEdit}
         create={StaffCreate}
-        icon={FaceIcon}
       />
       <Resource
         name="group"
         list={GroupList}
         edit={GroupEdit}
         create={GroupCreate}
-        icon={GroupIcon}
       />
       <Resource
         name="staff-position"
         list={StaffPositionList}
         edit={StaffPositionEdit}
         create={StaffPositionCreate}
-        icon={PortraitIcon}
       />
       <Resource
         name="staff-department"
         list={StaffDepartmentList}
         edit={StaffDepartmentEdit}
         create={StaffDepartmentCreate}
-        icon={WorkspacesIcon}
       />
-      <Resource name="permission" list={PermissionList} icon={VerifiedIcon} />
+      <Resource name="permission" list={PermissionList} />
+
+      {/* ads gen */}
+      <Resource
+        name="ads-client-company"
+        list={ClientCompanyList}
+        edit={ClientCompanyEdit}
+        create={ClientCompanyCreate}
+      />
 
       <Resource
         name="ads-language"
         list={LanguageList}
         edit={LanguageEdit}
         create={LanguageCreate}
-        icon={TranslateIcon}
       />
 
       <Resource
@@ -112,7 +106,6 @@ const App = () => (
         list={PlatformList}
         edit={PlatformEdit}
         create={PlatformCreate}
-        icon={ShareIcon}
       />
 
       <Resource
@@ -120,7 +113,6 @@ const App = () => (
         list={ToneList}
         edit={ToneEdit}
         create={ToneCreate}
-        icon={RecordVoiceOverIcon}
       />
 
       <Resource
@@ -128,7 +120,6 @@ const App = () => (
         list={TargetList}
         edit={TargetEdit}
         create={TargetCreate}
-        icon={ModeStandbySharpIcon}
       />
 
       <Resource
@@ -136,7 +127,6 @@ const App = () => (
         list={IndustryList}
         edit={IndustryEdit}
         create={IndustryCreate}
-        icon={WarehouseIcon}
       />
 
       <Resource
@@ -144,7 +134,6 @@ const App = () => (
         list={CompanySizeList}
         edit={CompanySizeEdit}
         create={CompanySizeCreate}
-        icon={GrainIcon}
       />
 
       <Resource
@@ -152,7 +141,6 @@ const App = () => (
         list={CompanyTypeList}
         edit={CompanyTypeEdit}
         create={CompanyTypeCreate}
-        icon={AssessmentIcon}
       />
     </Admin>
   </Router>

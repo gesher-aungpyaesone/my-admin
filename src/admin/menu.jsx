@@ -17,6 +17,7 @@ import WarehouseIcon from '@mui/icons-material/Warehouse';
 import GrainIcon from '@mui/icons-material/Grain';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ModeStandbySharpIcon from '@mui/icons-material/ModeStandbySharp';
+import HandshakeIcon from '@mui/icons-material/Handshake';
 
 export const CustomMenu = () => {
   const theme = useTheme();
@@ -24,7 +25,6 @@ export const CustomMenu = () => {
   return (
     <Menu
       sx={{
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -53,6 +53,7 @@ export const CustomMenu = () => {
         text="menu.ads_gen_ai"
         icon={<TextFieldsIcon />}
         access={[
+          'ads-client-company',
           'ads-language',
           'ads-platform',
           'ads-tone',
@@ -62,6 +63,10 @@ export const CustomMenu = () => {
           'ads-company-type',
         ]}
       >
+        <CustomResourceItem
+          name="ads-client-company"
+          icon={<HandshakeIcon />}
+        />
         <CustomResourceItem name="ads-language" icon={<TranslateIcon />} />
         <CustomResourceItem name="ads-platform" icon={<ShareIcon />} />
         <CustomResourceItem name="ads-tone" icon={<RecordVoiceOverIcon />} />

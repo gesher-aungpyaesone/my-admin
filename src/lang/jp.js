@@ -243,6 +243,28 @@ const jpfull = {
         history: '履歴',
       },
     },
+    'ads-client-company': {
+      name: 'クライアント',
+      list: 'クライアント一覧',
+      fields: {
+        id: 'ID',
+        name: '名',
+        website_url: '会社URL',
+        strength: '強み',
+        others: 'その他の追加',
+        industry_id: '業界',
+        type_id: '企業タイプ',
+        size_id: '企業規模',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+      tabs: {
+        info: 'information',
+        history: 'history',
+      },
+    },
   },
   pages: {
     auth: {

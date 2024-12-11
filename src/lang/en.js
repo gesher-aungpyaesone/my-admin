@@ -249,6 +249,28 @@ const enfull = {
         history: 'history',
       },
     },
+    'ads-client-company': {
+      name: 'Client Company',
+      list: 'Client Company List',
+      fields: {
+        id: 'ID',
+        name: 'Name',
+        website_url: 'Website URL',
+        strength: 'Strength',
+        others: 'Others',
+        industry_id: 'Industry',
+        type_id: 'Company Type',
+        size_id: 'Company Size',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        created_by_id: 'Created By',
+        updated_by_id: 'Updated By',
+      },
+      tabs: {
+        info: 'information',
+        history: 'history',
+      },
+    },
   },
   pages: {
     auth: {
