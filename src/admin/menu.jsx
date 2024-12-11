@@ -18,16 +18,23 @@ import GrainIcon from '@mui/icons-material/Grain';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ModeStandbySharpIcon from '@mui/icons-material/ModeStandbySharp';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import { useMediaQuery } from '@mui/system';
 
 export const CustomMenu = () => {
   const theme = useTheme();
-
+  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
     <Menu
+      dense={true}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        borderRight: `1px solid ${theme.palette.divider}`,
+        ...(isSmall
+          ? {}
+          : {
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              borderRight: `1px solid ${theme.palette.divider}`,
+            }),
       }}
     >
       <Menu.DashboardItem />

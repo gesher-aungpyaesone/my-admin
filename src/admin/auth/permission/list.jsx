@@ -1,19 +1,11 @@
-import {
-  DatagridConfigurable,
-  List,
-  NumberField,
-  SimpleList,
-  TextField,
-} from 'react-admin';
-
+import { DatagridConfigurable, List, SimpleList, TextField } from 'react-admin';
 import { useMediaQuery } from '@mui/material';
-import { ListActions } from '@component/ListActions';
 
 export const PermissionList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
-    <List actions={<ListActions />} title="resources.permission.list">
+    <List title="resources.permission.list">
       {isSmall ? (
         <SimpleList
           primaryText={(record) => record.name}
@@ -21,11 +13,11 @@ export const PermissionList = () => {
           tertiaryText={(record) => record.type.name}
         />
       ) : (
-        <DatagridConfigurable>
+        <DatagridConfigurable bulkActionButtons={false}>
           <TextField source="id" />
           <TextField source="name" />
-          <NumberField source="resource.name" sortBy="resource_id" />
-          <NumberField source="type.name" sortBy="type_id" />
+          <TextField source="resource.name" sortBy="resource_id" />
+          <TextField source="type.name" sortBy="type_id" />
         </DatagridConfigurable>
       )}
     </List>

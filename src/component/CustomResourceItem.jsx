@@ -29,7 +29,7 @@ export const CustomResourceItem = ({ name, icon, ...props }) => {
       {...props}
       to={`/${name}`}
       primaryText={translate(`resources.${name}.name`)}
-      sx={{ paddingRight: 1 }}
+      sx={{ paddingRight: 20 }}
       leftIcon={icon}
     />
   );

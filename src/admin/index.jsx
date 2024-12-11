@@ -84,7 +84,7 @@ const App = () => (
         edit={StaffDepartmentEdit}
         create={StaffDepartmentCreate}
       />
-      <Resource name="permission" list={PermissionList} />
+      <Resource name="permission" list={PermissionList} create={false} />
 
       {/* ads gen */}
       <Resource

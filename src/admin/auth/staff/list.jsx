@@ -11,6 +11,7 @@ import {
 import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ListActions } from '@component/ListActions';
+import { StaffTypeField } from '@component/StaffTypeField';
 
 export const StaffList = () => {
   const authProvider = useAuthProvider();
@@ -52,7 +53,7 @@ export const StaffList = () => {
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />
-          <TextField source="is_root" />
+          <StaffTypeField source="is_root" />
           <TextField
             source="department.name"
             sortBy="department_id"
