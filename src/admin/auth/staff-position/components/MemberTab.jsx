@@ -16,7 +16,7 @@ export const MemberTab = () => {
         pagination={<Pagination sx={{ width: '100%' }} />}
       >
         <Datagrid bulkActionButtons={false} sx={{ width: '100%' }}>
-          <TextField source="id" />
+          <TextField padding={'0px 4px'} source="id" />
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />

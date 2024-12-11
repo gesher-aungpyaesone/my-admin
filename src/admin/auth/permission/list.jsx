@@ -14,7 +14,7 @@ export const PermissionList = () => {
         />
       ) : (
         <DatagridConfigurable bulkActionButtons={false}>
-          <TextField source="id" />
+          <TextField padding={'0px 4px'} source="id" />
           <TextField source="name" />
           <TextField source="resource.name" sortBy="resource_id" />
           <TextField source="type.name" sortBy="type_id" />

@@ -47,8 +47,8 @@ export const ClientCompanyList = () => {
           secondaryText={(record) => record.website_url}
         />
       ) : (
-        <DatagridConfigurable>
-          <TextField source="id" />
+        <DatagridConfigurable bulkActionButtons={false}>
+          <TextField padding={'0px 4px'} source="id" />
           <TextField source="name" />
           <UrlField source="website_url" />
           <ReferenceField

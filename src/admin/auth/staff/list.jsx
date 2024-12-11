@@ -48,8 +48,8 @@ export const StaffList = () => {
           tertiaryText={(record) => record.department.name}
         />
       ) : (
-        <DatagridConfigurable>
-          <TextField source="id" />
+        <DatagridConfigurable bulkActionButtons={false}>
+          <TextField padding={'0px 4px'} source="id" />
           <TextField source="first_name" />
           <TextField source="last_name" />
           <EmailField source="email" />

@@ -45,8 +45,8 @@ export const StaffPositionList = () => {
           secondaryText={(record) => record.description}
         />
       ) : (
-        <DatagridConfigurable>
-          <TextField source="id" />
+        <DatagridConfigurable bulkActionButtons={false}>
+          <TextField padding={'0px 4px'} source="id" />
           <TextField source="name" />
           <TextField source="description" />
           <DateField
