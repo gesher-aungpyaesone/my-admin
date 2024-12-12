@@ -8,14 +8,17 @@ import {
 } from 'react-admin';
 import { Box, Typography } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { staffAPIProvider } from '@provider/staffAPIProvider';
 
 export const GroupAssignForm = () => {
   const translate = useTranslate();
   const recordId = useGetRecordId();
   const refresh = useRefresh();
-  const { setValue, handleSubmit } = useFormContext();
+  const groupId = useWatch({ name: 'group_id' });
+  const { setValue, handleSubmit, formState } = useFormContext();
+
+  const { isSubmitting, isValid } = formState;
 
   const onSubmit = async ({ group_id }) => {
     await staffAPIProvider.assignGroup({
@@ -50,6 +53,7 @@ export const GroupAssignForm = () => {
         label={translate('resources.staff.buttons.assign')}
         variant="contained"
         onClick={handleSubmit(onSubmit)}
+        disabled={!groupId || !isValid || isSubmitting}
       />
     </Box>
   );

@@ -46,6 +46,62 @@ import { ClientCompanyList } from './ads-gen/client-company/list';
 import { ClientCompanyEdit } from './ads-gen/client-company/edit';
 import { ClientCompanyCreate } from './ads-gen/client-company/create';
 
+import { deepmerge } from '@mui/utils';
+
+const themeOptions = {
+  components: {
+    MuiTextField: {
+      defaultProps: {
+        variant: 'filled',
+        margin: 'dense',
+        size: 'small',
+      },
+    },
+    MuiFormControl: {
+      defaultProps: {
+        variant: 'filled',
+        margin: 'dense',
+        size: 'small',
+      },
+    },
+
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          paddingTop: 2,
+          paddingBottom: 2,
+        },
+      },
+    },
+
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          'label+&.MuiInputBase-root': {
+            marginTop: 0,
+            paddingBottom: 4,
+            borderRadius: '4px 4px 0px 0px',
+          },
+          'label[data-shrink=false]+&.MuiInputBase-root': {
+            marginTop: 0,
+            paddingBottom: 4,
+            borderRadius: '4px 4px 0px 0px',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          paddingLeft: 0,
+        },
+      },
+    },
+  },
+};
+const lightTheme = deepmerge(nanoLightTheme, themeOptions);
+const darkTheme = deepmerge(nanoDarkTheme, themeOptions);
+
 const App = () => (
   <Router>
     <Admin
@@ -56,8 +112,8 @@ const App = () => (
       i18nProvider={i18nProvider}
       layout={CustomLayout}
       dashboard={Dashboard}
-      theme={nanoLightTheme}
-      darkTheme={nanoDarkTheme}
+      theme={lightTheme}
+      darkTheme={darkTheme}
     >
       {/* employee management */}
       <Resource

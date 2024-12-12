@@ -26,7 +26,9 @@ export const PermissionAssignForm = () => {
   const [resourceName, setResourceName] = useState(null);
   const [isAllowedAllPermission, setIsAllowedAllPermission] = useState(true);
   const dataProvider = useDataProvider();
-  const { setValue, handleSubmit } = useFormContext();
+  const { setValue, handleSubmit, formState } = useFormContext();
+
+  const { isSubmitting, isValid } = formState;
 
   useEffect(() => {
     if (permissionId) {
@@ -45,6 +47,9 @@ export const PermissionAssignForm = () => {
           }
           setTypeName(data.type.name);
         });
+    } else {
+      setValue('is_allowed_all', false);
+      setIsAllowedAllPermission(true);
     }
     setValue('allow_ids', []);
   }, [permissionId, dataProvider, setValue]);
@@ -70,7 +75,7 @@ export const PermissionAssignForm = () => {
     });
 
     setValue('permission_id', '');
-    setValue('is_allowed_all');
+    setValue('is_allowed_all', false);
     setValue('allow_ids', []);
     setIsAllowedAllPermission(true);
     refresh();
@@ -119,6 +124,7 @@ export const PermissionAssignForm = () => {
         label={translate('resources.staff.buttons.assign')}
         variant="contained"
         onClick={handleSubmit(onSubmit)}
+        disabled={!permissionId || !isValid || isSubmitting}
       />
     </Box>
   );
